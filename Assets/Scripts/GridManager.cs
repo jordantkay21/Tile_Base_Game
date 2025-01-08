@@ -19,6 +19,9 @@ public class GridManager : MonoBehaviour
     public Transform selectionIndicator;
     public GameObject hoveredTile;
     public GameObject selectedTile;
+
+    public delegate void TileSelectedEvent(GameObject tile);
+    public static event TileSelectedEvent OnTileSelected;
    
 
     private void Awake()
@@ -126,6 +129,9 @@ public class GridManager : MonoBehaviour
         selectedTile = tile;
 
         HighlightSelectedTile();
+
+        //Notify the UI
+        OnTileSelected?.Invoke(tile);
     }
     private void HighlightHoverTile()
     {
