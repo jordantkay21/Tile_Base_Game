@@ -1,0 +1,76 @@
+{
+    "name": "GameInput",
+    "maps": [
+        {
+            "name": "TileInteractions",
+            "id": "e31b2e86-efd8-4ae3-9d6b-72408ee28457",
+            "actions": [
+                {
+                    "name": "Hover",
+                    "type": "Value",
+                    "id": "a34f3012-1e97-423d-8348-eca3d27ba4e4",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Select",
+                    "type": "Button",
+                    "id": "b42dcdb3-da2b-4d01-91e4-e8609eb46599",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d36093e7-e397-47dd-8f64-160710269c71",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Hover",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "856e676d-2630-403e-bc90-ec4cca279b02",
+                    "path": "<Touchscreen>/primaryTouch/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Hover",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "eeaa6edb-802a-4337-b9b3-44add37eaa3e",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "848b74db-b0a2-4ba4-89bd-8d27d32cd38b",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

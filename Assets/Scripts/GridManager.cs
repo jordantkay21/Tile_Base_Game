@@ -1,5 +1,7 @@
 using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GridManager : MonoBehaviour
 {
@@ -20,8 +22,8 @@ public class GridManager : MonoBehaviour
     public GameObject hoveredTile;
     public GameObject selectedTile;
 
-    public delegate void TileSelectedEvent(GameObject tile);
-    public static event TileSelectedEvent OnTileSelected;
+    public static event Action<GameObject> OnTileSelected;
+    public static event Action OnTileDeselected; 
    
 
     private void Awake()
@@ -33,10 +35,54 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        TileRaycast();
+        InputManager.OnHover += HandleHover;
+        InputManager.OnSelect += HandleSelect;
     }
+
+    private void OnDisable()
+    {
+        InputManager.OnHover -= HandleHover;
+        InputManager.OnSelect -= HandleSelect;
+    }
+
+    #region Inputs
+    private void HandleHover(Vector2 screenPos)
+    {
+        Ray ray = raycastCamera.ScreenPointToRay(screenPos);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, tileLayerMask))
+        {
+            hoveredTile = hit.collider.gameObject;
+        }
+        else
+        {
+            hoveredTile = null;
+        }
+
+            HighlightHoverTile();
+    }
+
+    private void HandleSelect()
+    {
+        if (IsPointerOverUIElement()) return;
+
+        if (hoveredTile != null)
+        {
+            SelectTile(hoveredTile);
+        }
+        else
+        {
+            DeselectTile();
+        }
+    }
+
+    private bool IsPointerOverUIElement()
+    {
+        return EventSystem.current.IsPointerOverGameObject();
+    }
+    #endregion
 
     #region GridConfiguration
     [Button("Generate Grid")]
@@ -91,34 +137,6 @@ public class GridManager : MonoBehaviour
     #endregion
 
     #region Tile Selection Logic
-    private void TileRaycast()
-    {
-        Ray ray = raycastCamera.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-
-        if(Physics.Raycast(ray, out hit, Mathf.Infinity, tileLayerMask))
-        {
-            GameObject hitObject = hit.collider.gameObject;
-
-            if(hitObject != hoveredTile)
-            {
-                hoveredTile = hitObject;
-            }
-
-            if (Input.GetMouseButtonDown(0))
-            {
-                SelectTile(hitObject);
-            }
-
-        }
-        else
-        {
-            hoveredTile = null;
-        }
-
-        HighlightHoverTile();
-    }
-
     private void SelectTile(GameObject tile)
     {
         if(selectedTile != null)
@@ -154,6 +172,17 @@ public class GridManager : MonoBehaviour
     {
         selectionIndicator.gameObject.SetActive(false);
     }
+    private void DeselectTile()
+    {
+        if (selectedTile != null)
+        {
+            ResetSelectedTile();
+            selectedTile = null;
+
+            // Notify UI of deselection
+            OnTileDeselected?.Invoke();
+        }
+    }
 
     private void SetTileType(GameObject tileGO, Tile.TileType newType)
     {
@@ -161,4 +190,6 @@ public class GridManager : MonoBehaviour
         tile.SetTileType(newType);
     }
     #endregion
+
+
 }

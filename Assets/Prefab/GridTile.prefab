@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2533294053620797147}
   - component: {fileID: 6454905613736372784}
   - component: {fileID: 9102349385794398875}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: ICON
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -266,7 +266,6 @@ MonoBehaviour:
     IconMesh: {fileID: 4300000, guid: 0980632cc7d33674fbf7fb8c003ad896, type: 3}
   - TileType: 13
     IconMesh: {fileID: 4300000, guid: 0b007f74f233f484093d5acdd482f7e2, type: 3}
-  currentIcon: {fileID: 0}
   currentType:
     TileType: 0
     IconMesh: {fileID: 0}

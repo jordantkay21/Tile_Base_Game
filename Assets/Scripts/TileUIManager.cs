@@ -5,12 +5,14 @@ using UnityEngine.UI;
 public class TileUIManager : MonoBehaviour
 {
     public TMP_Text tileTypeText;
+    public GameObject tileDataPanel;
     public Button unlockButton;
     public Tile selectedTile;
 
     private void OnEnable()
     {
         GridManager.OnTileSelected += UpdateUI;
+        GridManager.OnTileDeselected += () => tileDataPanel.SetActive(false);
     }
 
     private void OnDisable()
@@ -23,6 +25,7 @@ public class TileUIManager : MonoBehaviour
         selectedTile = tileObject.GetComponent<Tile>();
         if (selectedTile != null)
         {
+            tileDataPanel.SetActive(true);
             tileTypeText.text = $"Type: {selectedTile.currentType.TileType}";
             unlockButton.interactable = selectedTile.currentType.TileType == Tile.TileType.Locked;
         }
