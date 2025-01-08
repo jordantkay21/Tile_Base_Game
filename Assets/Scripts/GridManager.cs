@@ -19,10 +19,7 @@ public class GridManager : MonoBehaviour
     public Transform selectionIndicator;
     public GameObject hoveredTile;
     public GameObject selectedTile;
-    
-
-    [Header("ICONS")]
-    public Transform baseIcon;
+   
 
     private void Awake()
     {
@@ -54,10 +51,12 @@ public class GridManager : MonoBehaviour
             for(int column = 0; column < columns; column++)
             {
                 Vector3 position = new Vector3(column * tileSize, 0, row * tileSize);
-                GameObject tile = Instantiate(tilePrefab, position, Quaternion.identity, rowContainer.transform);
+                GameObject tileGO = Instantiate(tilePrefab, position, Quaternion.identity, rowContainer.transform);
+                SetTileType(tileGO, Tile.TileType.Locked);
 
-                tile.name = $"Tile({row},{column})";
-                gridTiles[column, row] = tile;
+                tileGO.name = $"Tile({row},{column})";
+                gridTiles[column, row] = tileGO;
+
             }
         }
 
@@ -74,8 +73,7 @@ public class GridManager : MonoBehaviour
 
         centerTile = gridTiles[centerColumn, centerRow];
 
-        baseIcon.position = centerTile.transform.position;
-        baseIcon.gameObject.SetActive(true);
+        SetTileType(centerTile, Tile.TileType.Base);
     }
 
     [Button("Clear Grid")]
@@ -83,7 +81,6 @@ public class GridManager : MonoBehaviour
     {
         if (transform.childCount > 0)
         {
-            baseIcon.gameObject.SetActive(false);
             centerTile = null;
             DestroyImmediate(transform.GetChild(0).gameObject);
         }
@@ -142,16 +139,20 @@ public class GridManager : MonoBehaviour
             hoverIndicator.gameObject.SetActive(false);
         }
     }
-
     private void HighlightSelectedTile()
     {
         selectionIndicator.position = selectedTile.transform.position;
         selectionIndicator.gameObject.SetActive(true);
     }
-
     private void ResetSelectedTile()
     {
         selectionIndicator.gameObject.SetActive(false);
+    }
+
+    private void SetTileType(GameObject tileGO, Tile.TileType newType)
+    {
+        Tile tile = tileGO.GetComponent<Tile>();
+        tile.SetTileType(newType);
     }
     #endregion
 }
