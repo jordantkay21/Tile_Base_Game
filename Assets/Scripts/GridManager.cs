@@ -189,6 +189,16 @@ public class GridManager : MonoBehaviour
         Tile tile = tileGO.GetComponent<Tile>();
         tile.SetTileType(newType);
     }
+
+    public void ChangeTileType(Tile.TileType newType)
+    {
+        if(selectedTile != null)
+        {
+            Tile tile = selectedTile.GetComponent<Tile>();
+
+            tile.SetTileType(newType);
+        }
+    }
     #endregion
 
 
