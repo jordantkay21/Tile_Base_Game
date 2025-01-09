@@ -12,28 +12,16 @@ public class TileUIManager : MonoBehaviour
         public Tile.TileType type;
         public Button button;
     }
+ 
+    public Tile selectedTile;
 
     [Header("Tile Panel Configuration")]
     public GameObject tileDataPanel;
     public TMP_Text tileTypeText;
     public Button unlockButton;
-
     public List<IconButton> iconButtons;
-    //public Button forestButton;
-    //public Button mountainButton;
-    //public Button lumberMillButton;
-    //public Button mineButton;
-    //public Button farmButton;
-    //public Button settlementButton;
-    //public Button barracksButton;
-    //public Button watchtowerButton;
-    //public Button storageButton;
-    //public Button marketButton;
-    //public Button pathButton;
 
-    
 
-    public Tile selectedTile;
 
 
     private void Start()
@@ -60,23 +48,38 @@ public class TileUIManager : MonoBehaviour
     {
         if (selectedTile != null)
         {
-            Debug.Log($"{selectedTile} has changed to {newType}");
-            selectedTile.SetTileType(newType); 
+            if (selectedTile.isLocked == false)
+            {
+                Debug.Log($"{selectedTile} has changed to {newType}");
+                selectedTile.SetTileType(newType);
+            }
+            else
+            {
+                Debug.Log("Tile must be unlocked in order to change its type!");
+            }
         }
         else
         {
             Debug.Log("Selected Tile is Null");
         }
+
+        UpdateUI(selectedTile.gameObject);
     }
 
     private void UpdateUI(GameObject tileObject)
     {
+        Debug.Log("TilePanel UI Updated");
         selectedTile = tileObject.GetComponent<Tile>();
         if (selectedTile != null)
         {
             tileDataPanel.SetActive(true);
             tileTypeText.text = $"Type: {selectedTile.currentType.TileType}";
             unlockButton.interactable = selectedTile.currentType.TileType == Tile.TileType.Locked;
+
+            foreach(IconButton icon in iconButtons)
+            {
+                icon.button.interactable = selectedTile.currentType.TileType != Tile.TileType.Locked;
+            }
         }
     }
 
@@ -84,8 +87,10 @@ public class TileUIManager : MonoBehaviour
     {
         if (selectedTile != null && selectedTile.currentType.TileType == Tile.TileType.Locked)
         {
-            selectedTile.SetTileType(Tile.TileType.GrassPlains); // Example type
+            selectedTile.UnlockTile();
             unlockButton.interactable = false;
         }
+
+        UpdateUI(selectedTile.gameObject);
     }
 }

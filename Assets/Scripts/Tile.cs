@@ -42,15 +42,26 @@ public class Tile : MonoBehaviour
 
     [Header("Tile Configuration")]
     public List<TileData> tileTypes = new List<TileData>();
+    public bool isLocked = false;
     public TileData currentType;
+
+    public void UnlockTile()
+    {
+        isLocked = false;
+        SetTileType(TileType.GrassPlains);
+    }
 
     public void SetTileType(TileType newType)
     {
-        foreach(var type in tileTypes)
+        foreach (var type in tileTypes)
         {
             if (type.TileType != newType) continue;
 
-            if (type.TileType == TileType.Locked) tileMeshRenderer.material = lockedMaterial;
+            if (type.TileType == TileType.Locked)
+            {
+                tileMeshRenderer.material = lockedMaterial;
+                isLocked = true;
+            }
             else tileMeshRenderer.material = unlockedMaterial;
 
 
