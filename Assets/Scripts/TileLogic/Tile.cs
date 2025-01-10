@@ -9,10 +9,15 @@ public class Tile : MonoBehaviour
     public enum TileType
     {
         Locked,
+        Base,
         GrassPlains,
         Forest,
         Mountain,
-        Base,
+        Path
+    }
+
+    public enum StructureType
+    {
         LumberMill,
         Mine,
         Farm,
@@ -20,10 +25,9 @@ public class Tile : MonoBehaviour
         Barracks,
         Watchtower,
         Storage,
-        Market,
-        Path
-
+        Market
     }
+
     [System.Serializable]
     public class TileData
     {
@@ -76,7 +80,7 @@ public class Tile : MonoBehaviour
                 iconGO.SetActive(false);
             }
         }
-    }
+    } 
 
     public void SetIconMesh(Mesh newMesh)
     {

@@ -74,7 +74,7 @@ public class TileUIManager : MonoBehaviour
         {
             tileDataPanel.SetActive(true);
             tileTypeText.text = $"Type: {selectedTile.currentType.TileType}";
-            unlockButton.interactable = selectedTile.currentType.TileType == Tile.TileType.Locked;
+            unlockButton.gameObject.SetActive(selectedTile.currentType.TileType == Tile.TileType.Locked);
 
             foreach(IconButton icon in iconButtons)
             {
