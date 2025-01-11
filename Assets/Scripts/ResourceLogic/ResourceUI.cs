@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class UI_Resource : MonoBehaviour
+public class ResourceUI : MonoBehaviour
 {
     public TMP_Text woodText;
     public TMP_Text stoneText;

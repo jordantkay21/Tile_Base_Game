@@ -17,46 +17,42 @@ public class Card
 
 public class DeckManager : MonoBehaviour
 {
+    public static DeckManager Instance;
+
     [Tooltip("All Available Cards")]
-    public List<Card> cardPool = new List<Card>();
-    
-    [Tooltip("Parent Object for Card UI Elements")]
-    public Transform cardUIParent;
+    [SerializeField] List<Card> cardPool = new List<Card>();
 
-    [Tooltip("Prefab to represent a card in the UI")]
-    public GameObject cardUIPrefab;
-
-    [Button("Draw Card")]
-    public void DrawCard()
+    private void Awake()
     {
-        if (ResourceManager.Instance.SpendResource(ResourceManager.ResourceType.Coin, 10))
+        if(Instance == null)
         {
-            Card drawnCard = GetRandomCard();
-            DisplayCard(drawnCard);
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Debug.Log("Not enough coins to draw a card!");
+            Destroy(gameObject);
         }
     }
-    private Card GetRandomCard()
-    {
-        int randomIndex = Random.Range(0, cardPool.Count);
-        return cardPool[randomIndex];
-    }
 
-    private void DisplayCard(Card card)
+    [Button("Draw Card")]
+    public Card DrawCard()
     {
-        GameObject cardUI = Instantiate(cardUIPrefab, cardUIParent);
-        cardUI.name = card.name;
-
-        // Update card UI with card data
-        CardUI cardUIComponent = cardUI.GetComponent<CardUI>();
-        if (cardUIComponent != null)
+        if (!ResourceManager.Instance.SpendResource(ResourceManager.ResourceType.Coin, 10))
         {
-            cardUIComponent.SetCard(card);
+            Debug.Log("Not enough coins to draw a card!");
+            return null;
         }
 
-        Debug.Log($"Drew card: {card.name}");
+        //Select a random card from the pool
+        int randomIndex = Random.Range(0, cardPool.Count);
+        Card drawnCard = cardPool[randomIndex];
+
+        //Add to player's inventory
+        InventoryManager.Instance.AddCard(drawnCard);
+
+        //Return the drawn card (optional, for further processing)
+        return drawnCard; 
+
     }
 }
