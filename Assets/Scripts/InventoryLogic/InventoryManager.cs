@@ -1,5 +1,8 @@
+using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public enum CardType
 {
     Mountain,
@@ -12,17 +15,15 @@ public enum CardType
     Path_Tee,
     Path_Cross
 }
-public class CardData
-{
-    public string Name;
-    public CardType Type;
-    public Sprite Icon;
-}
+
+
 
 public class InventoryManager : MonoBehaviour
 {
+    [ShowInInspector]
+    public Dictionary<CardType, CardData> cardTypes = new Dictionary<CardType, CardData>();
 
-    public CardData BaseCard;
+    public List<CardData> drawnCards = new List<CardData>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

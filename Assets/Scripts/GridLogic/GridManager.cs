@@ -1,7 +1,10 @@
 using Sirenix.OdinInspector;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
+[System.Serializable]
 public enum TileType
 {
     Locked,
@@ -9,15 +12,10 @@ public enum TileType
     Resource,
     Fertalized,
     Developed,
-    Path
-}
-
-public class TileData
-{
-    public TileType Type;
-    public Mesh Mesh;
-    public Material Material;
-    public int objIndex;
+    Path_Straight,
+    Path_Turn,
+    Path_Tee,
+    Path_Cross
 }
 
 public class GridManager : MonoBehaviour

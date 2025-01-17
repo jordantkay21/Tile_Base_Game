@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e299a64c9dbda004d85a8c1034b60f29, type: 3}
+  m_Name: Tile_Foundation_Fertalized
+  m_EditorClassIdentifier: 
+  Type: 3
+  Mesh: {fileID: 4300000, guid: 9fb40de85ff0d0e48b9f250ec53c11de, type: 3}
+  Material: {fileID: 2100000, guid: a16b7b85a356b7d469067849a165dcff, type: 2}
+  TileObj: {fileID: 2402432077504977996, guid: 521a5b2965390ec46b886ad084e7a8ce, type: 3}

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e299a64c9dbda004d85a8c1034b60f29, type: 3}
+  m_Name: Tile_Path_Tee
+  m_EditorClassIdentifier: 
+  Type: 6
+  Mesh: {fileID: 4300000, guid: f8857514fce5a8d489998fdddf89e079, type: 3}
+  Material: {fileID: 2100000, guid: a16b7b85a356b7d469067849a165dcff, type: 2}
+  TileObj: {fileID: 2778928227207093024, guid: 8543abbe3ace43d418d699c1b477aa39, type: 3}
