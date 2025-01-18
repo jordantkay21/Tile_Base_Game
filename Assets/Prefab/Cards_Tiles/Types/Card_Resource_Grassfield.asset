@@ -10,8 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6afdc61bc9a08a34b809cbf2ce2fb4eb, type: 3}
-  m_Name: Card_Resource_Mountain
+  m_Name: Card_Resource_Grassfield
   m_EditorClassIdentifier: 
-  Name: Mountain Card
-  Type: 0
-  Icon: {fileID: -1121605603, guid: c515883341b83e142bc7716e5ae6249d, type: 3}
+  cardType: 0
+  cardName: Grassfield Tile
+  Icon: {fileID: 1550317349, guid: c515883341b83e142bc7716e5ae6249d, type: 3}
+  tileType: 2
+  resourceType: 2
+  structureType: 0

@@ -10,8 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6afdc61bc9a08a34b809cbf2ce2fb4eb, type: 3}
-  m_Name: Card_Path_Tee
+  m_Name: Card_Developed
   m_EditorClassIdentifier: 
-  Name: Tee Path Card
-  Type: 7
-  Icon: {fileID: 1032815435, guid: 30ac78c3c2bf4bf4a8ec590d6d17adf5, type: 3}
+  cardType: 0
+  cardName: Developed Tile
+  Icon: {fileID: 565132270, guid: c515883341b83e142bc7716e5ae6249d, type: 3}
+  tileType: 4
+  resourceType: 0
+  structureType: 0

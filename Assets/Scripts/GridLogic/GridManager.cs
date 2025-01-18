@@ -5,17 +5,44 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 [System.Serializable]
+public enum TileTier
+{
+    Predefined,
+    Resource,
+    Foundation
+}
+
+[System.Serializable]
 public enum TileType
 {
     Locked,
     Undefined,
-    Resource,
+    Mountain,
+    Forest,
+    Grassfield,
     Fertalized,
     Developed,
     Path_Straight,
     Path_Turn,
     Path_Tee,
     Path_Cross
+}
+[System.Serializable]
+public enum ResourceType
+{
+    Mountain,
+    Forest,
+    Grass
+}
+[System.Serializable]
+public enum StructureType
+{
+    Base,
+    Storage,
+    Market,
+    Watchtower,
+    Barracks,
+    Barn
 }
 
 public class GridManager : MonoBehaviour

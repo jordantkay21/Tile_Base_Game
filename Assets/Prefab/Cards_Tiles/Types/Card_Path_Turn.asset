@@ -10,8 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6afdc61bc9a08a34b809cbf2ce2fb4eb, type: 3}
-  m_Name: Card_Developed
+  m_Name: Card_Path_Turn
   m_EditorClassIdentifier: 
-  Name: Developed Tile Card
-  Type: 4
-  Icon: {fileID: 565132270, guid: c515883341b83e142bc7716e5ae6249d, type: 3}
+  cardType: 0
+  cardName: Turn Path Tile
+  Icon: {fileID: 1865459424, guid: 30ac78c3c2bf4bf4a8ec590d6d17adf5, type: 3}
+  tileType: 6
+  resourceType: 0
+  structureType: 0

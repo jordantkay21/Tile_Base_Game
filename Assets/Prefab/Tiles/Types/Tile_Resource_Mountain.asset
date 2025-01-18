@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e299a64c9dbda004d85a8c1034b60f29, type: 3}
-  m_Name: Tile_Foundation_Developed
+  m_Name: Tile_Resource_Mountain
   m_EditorClassIdentifier: 
-  Type: 6
-  Tier: 2
-  Mesh: {fileID: 4300000, guid: 8d8f0a0d33b65c24f843de9584478878, type: 3}
+  Type: 2
+  Tier: 1
+  Mesh: {fileID: 4300000, guid: 9fb40de85ff0d0e48b9f250ec53c11de, type: 3}
   Material: {fileID: 2100000, guid: a16b7b85a356b7d469067849a165dcff, type: 2}
-  TileObj: {fileID: 1528838587426417967, guid: 1745432eae2534645a6bc1d6e9047cd9, type: 3}
+  TileObj: {fileID: 3987459438132012712, guid: fca8d39f00e14ac48ab212c208e77ec2, type: 3}

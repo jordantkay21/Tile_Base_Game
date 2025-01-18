@@ -10,8 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6afdc61bc9a08a34b809cbf2ce2fb4eb, type: 3}
-  m_Name: Card_Fertailized
+  m_Name: Card_Resource_Mountain
   m_EditorClassIdentifier: 
-  Name: Fertalized Tile Card
-  Type: 3
-  Icon: {fileID: 592290906, guid: c515883341b83e142bc7716e5ae6249d, type: 3}
+  cardType: 0
+  cardName: Mountain Tile
+  Icon: {fileID: -1121605603, guid: c515883341b83e142bc7716e5ae6249d, type: 3}
+  tileType: 2
+  resourceType: 0
+  structureType: 0

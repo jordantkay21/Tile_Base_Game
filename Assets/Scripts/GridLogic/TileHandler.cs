@@ -8,6 +8,7 @@ public class TileHandler : MonoBehaviour
     public TileData[] tileTypes = new TileData[9];
 
     public TileData currentTile;
+    public CardData attachedCard;
 
     [Header("Tile Components")]
     public MeshFilter meshFilter;
@@ -23,18 +24,27 @@ public class TileHandler : MonoBehaviour
 
     public void DefineTileType(TileType newType)
     {
+        Debug.Log($"Defining {transform.name} to {newType}");
         currentTile = GetTileData(newType);
-        SetTileVisuals();
+
+        if (currentTile != null)
+            SetTileVisuals();
+        else
+            Debug.Log($"{name}'s currentTile is null");
     }
 
     private void SetTileVisuals()
     {
-        Debug.Log("Setting Tile Visuals");
         meshFilter.mesh = currentTile.Mesh;
         meshCollider.sharedMesh = currentTile.Mesh;
         meshRenderer.material = currentTile.Material;
         if (tileObj != null) Destroy(tileObj);
-        tileObj = currentTile.SpawnObj(transform.position, transform);
+        tileObj = currentTile.SpawnObj(transform);
+    }
+
+    public void SetCard(CardData card)
+    {
+        attachedCard = card;
     }
 
     private TileData GetTileData(TileType tileType)

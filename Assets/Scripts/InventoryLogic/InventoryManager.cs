@@ -5,15 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public enum CardType
 {
-    Mountain,
-    Forest,
-    Grassfield,
-    Fertailized,
-    Developed,
-    Path_Straight,
-    Path_Turn,
-    Path_Tee,
-    Path_Cross
+    TileCard,
+    StructureCard
 }
 
 

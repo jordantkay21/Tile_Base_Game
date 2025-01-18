@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 7536555145249511136}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -125,6 +125,8 @@ MonoBehaviour:
   tileTypes:
   - {fileID: 11400000, guid: 858ce7e602d6a744298aaa594ec7b0d3, type: 2}
   - {fileID: 11400000, guid: 449748eb07bd16446b7a8d91a0cb6870, type: 2}
+  - {fileID: 11400000, guid: e07862716aa0404408a14a51879ce230, type: 2}
+  - {fileID: 11400000, guid: fe0675e02a16bae45a6738ab23d2fbe3, type: 2}
   - {fileID: 11400000, guid: 68ed199dd0d714943a983fd19e62478e, type: 2}
   - {fileID: 11400000, guid: b450f58d2a291f241a419766ac0ae130, type: 2}
   - {fileID: 11400000, guid: 16b984eb1d19e154c801740f00aa971c, type: 2}
@@ -133,6 +135,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d9a2cb2a9e50bd24aae721f124e57004, type: 2}
   - {fileID: 11400000, guid: 5c8a03ea2533a6f4b93c94f2b65dda53, type: 2}
   currentTile: {fileID: 0}
+  attachedCard: {fileID: 0}
   meshFilter: {fileID: 1341675763616237594}
   meshCollider: {fileID: 4448530858200871195}
   meshRenderer: {fileID: 7035315755774257745}

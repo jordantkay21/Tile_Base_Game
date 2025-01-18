@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 
     public static event Action<GameObject> OnTileSelected;
     public static event Action<GameObject> OnTileHovered;
+    public static event Action OnTileDefined;
 
     private void Awake()
     {
@@ -33,6 +34,7 @@ public class GameManager : MonoBehaviour
     {
         InputManager.OnHover += HandleHover;
         InputManager.OnSelect += HandleSelect;
+
     }
 
     private void HandleHover(Vector2 screenPos)
@@ -52,6 +54,8 @@ public class GameManager : MonoBehaviour
 
     private void HandleSelect()
     {
+        if (IsPointerOverUIElement()) return;
+
         if (hoveredTile != null)
         {
             SelectTile(hoveredTile);
@@ -76,15 +80,35 @@ public class GameManager : MonoBehaviour
         OnTileSelected.Invoke(tile);
     }
 
+    private bool IsPointerOverUIElement()
+    {
+        return EventSystem.current.IsPointerOverGameObject();
+    }
+
     private void DeselectTile()
     {
         if (selectedTile != null)
         {
             selectedTile = null;
-
-            OnTileSelected?.Invoke(null);
         }
+            OnTileSelected?.Invoke(null);
     }
 
     #endregion
+
+    public void DefineTile(TileData newTile)
+    {
+        Debug.Log($"{newTile.Type} was clicked");
+        if(selectedTile != null)
+        {
+            TileHandler tileData = selectedTile.GetComponent <TileHandler>();
+            tileData.DefineTileType(newTile.Type);
+            OnTileDefined?.Invoke();
+        }
+        else
+        {
+            Debug.Log("SelectedTile is NULL");
+        }
+
+    }
 }

@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e299a64c9dbda004d85a8c1034b60f29, type: 3}
-  m_Name: Tile_Resource
+  m_Name: Tile_Resource_Forest
   m_EditorClassIdentifier: 
-  Type: 2
+  Type: 3
+  Tier: 1
   Mesh: {fileID: 4300000, guid: 9fb40de85ff0d0e48b9f250ec53c11de, type: 3}
   Material: {fileID: 2100000, guid: a16b7b85a356b7d469067849a165dcff, type: 2}
-  TileObj: {fileID: 9196510441528969967, guid: 05f5e58b0765aef49805fd3b6ed654b4, type: 3}
+  TileObj: {fileID: 8548247349373051332, guid: a3400fc9cf612154980940c3bb8603ec, type: 3}

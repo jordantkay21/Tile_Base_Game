@@ -10,8 +10,8 @@ public class ConfirmationWindow : MonoBehaviour
     public Button confirmButton;
     public Button cancelButton;
 
-    private System.Action onConfirm;
-    private System.Action onCancel;
+    private Action onConfirm;
+    private Action onCancel;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,7 +22,7 @@ public class ConfirmationWindow : MonoBehaviour
         cancelButton.onClick.AddListener(HandleCancel);
     }
 
-    public void ShowConfirmation(string message, System.Action confirmAction, System.Action cancelAction)
+    public void ShowConfirmation(string message, Action confirmAction, Action cancelAction)
     {
         messageText.text = message;
 
@@ -50,8 +50,7 @@ public class ConfirmationWindow : MonoBehaviour
     private void HandleCancel()
     {
         onCancel?.Invoke();
-
-        HandleCancel();
+        
     }
 
     // Update is called once per frame
