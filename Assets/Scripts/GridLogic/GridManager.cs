@@ -83,6 +83,8 @@ public class GridManager : MonoBehaviour
                 gridTiles[column, row] = tileGO;
             }
         }
+
+        DetectCenterTile();
     }
 
     public void DetectCenterTile()
@@ -94,5 +96,8 @@ public class GridManager : MonoBehaviour
         if (columns % 2 == 0) centerColumn -= 1;
 
         centerTile = gridTiles[centerColumn, centerRow];
+
+        TileHandler centerData = centerTile.GetComponent<TileHandler>();
+        centerData.DefineTileType(TileType.Developed);
     }
 }
