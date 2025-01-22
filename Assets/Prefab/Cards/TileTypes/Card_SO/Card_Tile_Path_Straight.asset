@@ -15,8 +15,6 @@ MonoBehaviour:
   cardType: 0
   cardName: Straight Path Tile
   Icon: {fileID: -987944888, guid: 8c7a18b7cc13dfe49a5959668239631b, type: 3}
-  tileType: 5
-  tileData: {fileID: 0}
-  tileTier: 0
+  tileData: {fileID: 11400000, guid: 364aa19a98b7f234fa45fdd7e02438cd, type: 2}
   structureType: 0
   structureObj: {fileID: 0}

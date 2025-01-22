@@ -14,9 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardType: 1
   cardName: Barracks Card
-  Icon: {fileID: 0}
-  tileType: 0
+  Icon: {fileID: -2011678278, guid: 0368a3dddcb61474bafa44819167a330, type: 3}
   tileData: {fileID: 0}
-  tileTier: 0
   structureType: 4
-  structureObj: {fileID: 0}
+  structureObj: {fileID: 1319344196569674422, guid: 83038d189e143dd4aa5659ef8cff6738, type: 3}

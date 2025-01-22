@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    public TileData[] tileTypes = new TileData[9];
+    public CardData[] structureTypes = new CardData[9];
+
     [Header("Tile Selection Properties")]
     public Camera raycastCamera;
     public LayerMask tileLayerMask;
@@ -96,13 +99,13 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    public void DefineTile(TileData newTile)
+    public void AttachCard(CardData newCard)
     {
-        Debug.Log($"{newTile.Type} was clicked");
+        Debug.Log($"{newCard.cardType} was clicked");
         if(selectedTile != null)
         {
             TileHandler tileData = selectedTile.GetComponent <TileHandler>();
-            tileData.DefineTileType(newTile.Type);
+            tileData.AttachedCard = newCard;
             OnTileDefined?.Invoke();
         }
         else
@@ -110,5 +113,27 @@ public class GameManager : MonoBehaviour
             Debug.Log("SelectedTile is NULL");
         }
 
+    }
+
+    public TileData GetTileData(TileType tileType)
+    {
+        foreach (TileData type in tileTypes)
+        {
+            if (type.Type == tileType)
+                return type;
+        }
+
+        return null;
+    }
+
+    public CardData GetStructureCard(StructureType structureType)
+    {
+        foreach (CardData card in structureTypes)
+        {
+            if (card.structureType == structureType)
+                return card;
+        }
+
+        return null;
     }
 }

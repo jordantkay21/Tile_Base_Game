@@ -7,18 +7,9 @@ public class TileCardPanel : MonoBehaviour
     public GameObject panel;
     public GameObject resourceCards;
     public GameObject foundationCards;
+    public GameObject structureDevelopCards;
+    public GameObject structureFertalizeCards;
 
-    public Button MountainButton;
-    public Button ForestButton;
-    public Button GrassButton;
-    public Button DevelopedButton;
-    public Button FertalizedButton;
-    public Button StraightButton;
-    public Button TurnButton;
-    public Button TeeButton;
-    public Button CrossButton;
-
-    private Action onCardSelect;
 
     public void ShowResourceCards()
     {
@@ -32,10 +23,26 @@ public class TileCardPanel : MonoBehaviour
         foundationCards.SetActive(true);
     }
 
+    public void ShowStructureDevelopCards()
+    {
+        panel.SetActive(true);
+        structureDevelopCards.SetActive(true);
+    }
+
+    public void ShowStructureFertalizeCards()
+    {
+        panel.SetActive(true);
+        structureFertalizeCards.SetActive(true);
+    }
+
     public void HidePanel()
     {
         foundationCards.SetActive(false);
         resourceCards.SetActive(false);
+        structureFertalizeCards.SetActive(false);
+        structureDevelopCards.SetActive(false);
         panel.SetActive(false);
     }
+
+   
 }

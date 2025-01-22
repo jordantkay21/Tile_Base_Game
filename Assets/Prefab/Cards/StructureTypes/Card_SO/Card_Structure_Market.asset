@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardType: 1
   cardName: Market Card
-  Icon: {fileID: 0}
-  tileType: 0
-  tileTier: 0
+  Icon: {fileID: -775932286, guid: 42b3aa4ed5e8d4845b737876ce8f5776, type: 3}
+  tileData: {fileID: 0}
   structureType: 2
+  structureObj: {fileID: 3111093662102723657, guid: 26339a158b96a3f4281ba87c47dba9fc, type: 3}

@@ -170,7 +170,7 @@ TextureImporter:
         width: 945
         height: 621
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -179,28 +179,6 @@ TextureImporter:
       bones: []
       spriteID: 0ac3157c84699784ea482d73bab3e050
       internalID: -1672733691
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: LumberMill_2
-      rect:
-        serializedVersion: 2
-        x: 1028
-        y: 1279
-        width: 7
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 842615023fcccb547933f4f640b4522a
-      internalID: 463880428
       vertices: []
       indices: 
       edges: []

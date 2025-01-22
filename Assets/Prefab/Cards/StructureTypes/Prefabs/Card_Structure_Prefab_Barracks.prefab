@@ -423,7 +423,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2112723623217091016}
   m_Layer: 6
-  m_Name: Card_Structure_Prefab_Stronghold
+  m_Name: Card_Structure_Prefab_Barracks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -15,8 +15,6 @@ MonoBehaviour:
   cardType: 0
   cardName: Mountain Tile
   Icon: {fileID: 1053531187, guid: cf374dd436a0560409ade8f3757109f2, type: 3}
-  tileType: 2
-  tileData: {fileID: 0}
-  tileTier: 1
+  tileData: {fileID: 11400000, guid: e07862716aa0404408a14a51879ce230, type: 2}
   structureType: 0
   structureObj: {fileID: 0}

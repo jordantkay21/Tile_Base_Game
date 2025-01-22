@@ -15,8 +15,6 @@ MonoBehaviour:
   cardType: 0
   cardName: Tee Path Tile
   Icon: {fileID: 933488537, guid: 3f422955b7b16034d9c5a31023bf32e2, type: 3}
-  tileType: 7
-  tileData: {fileID: 0}
-  tileTier: 0
+  tileData: {fileID: 11400000, guid: d9a2cb2a9e50bd24aae721f124e57004, type: 2}
   structureType: 0
   structureObj: {fileID: 0}

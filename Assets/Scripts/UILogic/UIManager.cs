@@ -25,15 +25,15 @@ public class UIManager : MonoBehaviour
 
     private void OpenUIMenu(GameObject tile)
     {
-        TileHandler tileData = tile.GetComponent<TileHandler>();
-        Debug.Log($"Selected tile: {tile.name} \nTile Type {tileData.currentTile.Type}");
+        TileHandler tHandler = tile.GetComponent<TileHandler>();
+        Debug.Log($"Selected tile: {tile.name} \nTile Type {tHandler.CurrentTile.Type}");
 
-        switch (tileData.currentTile.Type)
+        switch (tHandler.CurrentTile.Type)
         {
             case TileType.Locked:
                 confirmWindow.ShowConfirmation(
                 "Do you wish to unlock the selected tile?",
-            () => ConfirmTileSelection(tileData, TileType.Undefined),
+            () => ConfirmTileSelection(tHandler, TileType.Undefined),
             () => DeselectTile()
             ) ;
                 break;
@@ -43,6 +43,12 @@ public class UIManager : MonoBehaviour
             case TileType.Grassfield:
                 tileCardPanel.ShowFoundationCards();
                 break;
+            case TileType.Developed:
+                tileCardPanel.ShowStructureDevelopCards();
+                break;
+            case TileType.Fertalized:
+                tileCardPanel.ShowStructureFertalizeCards();
+                break;
             default:
                 break;
         }
@@ -50,7 +56,7 @@ public class UIManager : MonoBehaviour
 
     public void ConfirmTileSelection(TileHandler tile, TileType newType)
     {
-        tile.DefineTileType(newType);
+        tile.CurrentTile = GameManager.Instance.GetTileData(newType);
         confirmWindow.HideConfirmation();
         DeselectTile();
     }

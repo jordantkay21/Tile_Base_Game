@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardType: 1
   cardName: Barn Card
-  Icon: {fileID: 0}
-  tileType: 0
-  tileTier: 0
+  Icon: {fileID: 2080305752, guid: fbc659ab4db30e34fb5a696342fac6c9, type: 3}
+  tileData: {fileID: 0}
   structureType: 5
+  structureObj: {fileID: 5635925416761984872, guid: 501e3b82a6a0cad49ad9aaae85064440, type: 3}

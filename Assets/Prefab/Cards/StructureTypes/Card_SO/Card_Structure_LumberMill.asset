@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6afdc61bc9a08a34b809cbf2ce2fb4eb, type: 3}
-  m_Name: Card_Tile_Fertailized
+  m_Name: Card_Structure_LumberMill
   m_EditorClassIdentifier: 
-  cardType: 0
-  cardName: Fertalized Tile
-  Icon: {fileID: 592290906, guid: c515883341b83e142bc7716e5ae6249d, type: 3}
-  tileData: {fileID: 11400000, guid: 16b984eb1d19e154c801740f00aa971c, type: 2}
-  structureType: 0
-  structureObj: {fileID: 0}
+  cardType: 1
+  cardName: Lumber Mill Card
+  Icon: {fileID: -1672733691, guid: 247fdb9d71a489949bf04a71f6fb4bb7, type: 3}
+  tileData: {fileID: 0}
+  structureType: 6
+  structureObj: {fileID: 913818149088385672, guid: 4a9afc97c487b1d4a8c2201ab31c7c28, type: 3}

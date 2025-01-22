@@ -15,8 +15,6 @@ MonoBehaviour:
   cardType: 0
   cardName: Cross Path Tile
   Icon: {fileID: 137212231, guid: 99404f34ffa51d845937e4ee7c0d6fc8, type: 3}
-  tileType: 8
-  tileData: {fileID: 0}
-  tileTier: 0
+  tileData: {fileID: 11400000, guid: 5c8a03ea2533a6f4b93c94f2b65dda53, type: 2}
   structureType: 0
   structureObj: {fileID: 0}

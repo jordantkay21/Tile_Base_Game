@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardType: 1
   cardName: Watchtower Card
-  Icon: {fileID: 0}
-  tileType: 0
-  tileTier: 0
+  Icon: {fileID: 378491835, guid: c470e8912f40dbb4f892b97c380736ce, type: 3}
+  tileData: {fileID: 0}
   structureType: 3
+  structureObj: {fileID: 2918709117655954847, guid: 42f8183a9fafc1344b5136f0c4ff6c6b, type: 3}

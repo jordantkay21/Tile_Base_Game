@@ -15,6 +15,6 @@ MonoBehaviour:
   cardType: 0
   cardName: Developed Tile
   Icon: {fileID: 565132270, guid: c515883341b83e142bc7716e5ae6249d, type: 3}
-  tileType: 4
-  resourceType: 0
+  tileData: {fileID: 11400000, guid: b450f58d2a291f241a419766ac0ae130, type: 2}
   structureType: 0
+  structureObj: {fileID: 0}

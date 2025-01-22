@@ -29,4 +29,13 @@ public class CardData : ScriptableObject
     public GameObject structureObj;
     #endregion
 
+    public GameObject SpawnObj(Transform parent = null)
+    {
+        Debug.Log("SpawnObj Called");
+        if (structureObj == null) return null;
+
+        GameObject spawnedObj = Instantiate(structureObj, parent, false);
+        return spawnedObj;
+    }
+
 }

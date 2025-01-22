@@ -9,7 +9,8 @@ public enum TileTier
 {
     Predefined,
     Resource,
-    Foundation
+    Foundation,
+    Path
 }
 
 [System.Serializable]
@@ -42,7 +43,9 @@ public enum StructureType
     Market,
     Watchtower,
     Barracks,
-    Barn
+    Barn,
+    LumberMill,
+    Mine
 }
 
 public class GridManager : MonoBehaviour
@@ -80,6 +83,9 @@ public class GridManager : MonoBehaviour
 
                 tileGO.name = $"Tile({row},{column})";
 
+                TileHandler tHandler = tileGO.GetComponent<TileHandler>();
+                tHandler.CurrentTile = GameManager.Instance.GetTileData(TileType.Locked);
+
                 gridTiles[column, row] = tileGO;
             }
         }
@@ -97,7 +103,8 @@ public class GridManager : MonoBehaviour
 
         centerTile = gridTiles[centerColumn, centerRow];
 
-        TileHandler centerData = centerTile.GetComponent<TileHandler>();
-        centerData.DefineTileType(TileType.Developed);
+        TileHandler tHandler = centerTile.GetComponent<TileHandler>();
+        tHandler.CurrentTile = GameManager.Instance.GetTileData(TileType.Path_Cross);
+        tHandler.AttachedCard = GameManager.Instance.GetStructureCard(StructureType.Base);
     }
 }

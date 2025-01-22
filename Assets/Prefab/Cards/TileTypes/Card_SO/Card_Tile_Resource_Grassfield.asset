@@ -15,8 +15,6 @@ MonoBehaviour:
   cardType: 0
   cardName: Grassfield Tile
   Icon: {fileID: 1190425608, guid: a08402fc3f1267a45a569c46cf8af1ff, type: 3}
-  tileType: 4
-  tileData: {fileID: 0}
-  tileTier: 1
+  tileData: {fileID: 11400000, guid: 68ed199dd0d714943a983fd19e62478e, type: 2}
   structureType: 0
   structureObj: {fileID: 0}

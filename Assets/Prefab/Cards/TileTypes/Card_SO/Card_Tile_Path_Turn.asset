@@ -15,8 +15,6 @@ MonoBehaviour:
   cardType: 0
   cardName: Turn Path Tile
   Icon: {fileID: -35401110, guid: 8813f10e99cf73546b3e96ffe0ec7af7, type: 3}
-  tileType: 6
-  tileData: {fileID: 0}
-  tileTier: 0
+  tileData: {fileID: 11400000, guid: 8ed1a3c06cffe3e49b5e7bb2ef3818b2, type: 2}
   structureType: 0
   structureObj: {fileID: 0}

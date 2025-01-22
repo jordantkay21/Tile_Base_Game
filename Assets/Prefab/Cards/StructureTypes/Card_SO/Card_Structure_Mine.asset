@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6afdc61bc9a08a34b809cbf2ce2fb4eb, type: 3}
-  m_Name: Card_Tile_Fertailized
+  m_Name: Card_Structure_Mine
   m_EditorClassIdentifier: 
-  cardType: 0
-  cardName: Fertalized Tile
-  Icon: {fileID: 592290906, guid: c515883341b83e142bc7716e5ae6249d, type: 3}
-  tileData: {fileID: 11400000, guid: 16b984eb1d19e154c801740f00aa971c, type: 2}
-  structureType: 0
-  structureObj: {fileID: 0}
+  cardType: 1
+  cardName: Mine Card
+  Icon: {fileID: 1845301083, guid: 48b00d8f30a62904197e3f601cdfa317, type: 3}
+  tileData: {fileID: 0}
+  structureType: 7
+  structureObj: {fileID: 8353344026148309795, guid: 3c2421e2a7ad5744f9a66ec826a4ebee, type: 3}

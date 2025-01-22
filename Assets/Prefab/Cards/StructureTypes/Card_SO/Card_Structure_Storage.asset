@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardType: 1
   cardName: Storage Card
-  Icon: {fileID: 0}
-  tileType: 0
-  tileTier: 0
+  Icon: {fileID: -582336066, guid: 41cd5d296c572db4d98362f84a638c95, type: 3}
+  tileData: {fileID: 0}
   structureType: 1
+  structureObj: {fileID: 1048955946064149686, guid: cb383514256f5364b9fdcc45d1667b48, type: 3}

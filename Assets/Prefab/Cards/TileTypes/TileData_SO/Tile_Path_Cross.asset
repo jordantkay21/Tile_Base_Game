@@ -13,7 +13,31 @@ MonoBehaviour:
   m_Name: Tile_Path_Cross
   m_EditorClassIdentifier: 
   Type: 10
-  Tier: 2
+  Tier: 3
   Mesh: {fileID: 4300000, guid: 412f68b4ad005834f8580394a36781ce, type: 3}
   Material: {fileID: 2100000, guid: a16b7b85a356b7d469067849a165dcff, type: 2}
   TileObj: {fileID: 2778928227207093024, guid: 8543abbe3ace43d418d699c1b477aa39, type: 3}
+  TopSide:
+    State: 0
+    radius: 0.5
+    maxDistance: 0
+    direction: {x: 0, y: 0, z: 0}
+    origin: {x: 0, y: 0, z: 2.5}
+  RightSide:
+    State: 0
+    radius: 0.5
+    maxDistance: 0
+    direction: {x: 0, y: 0, z: 0}
+    origin: {x: 0, y: 0, z: 2.5}
+  BottomSide:
+    State: 0
+    radius: 0.5
+    maxDistance: 0
+    direction: {x: 0, y: 0, z: 0}
+    origin: {x: 0, y: 0, z: 2.5}
+  LeftSide:
+    State: 0
+    radius: 0.5
+    maxDistance: 0
+    direction: {x: 0, y: 0, z: 0}
+    origin: {x: 0, y: 0, z: 2.5}

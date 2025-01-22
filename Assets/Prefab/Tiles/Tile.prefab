@@ -122,20 +122,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 734d8004fcbc7634d869e94540978cd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileTypes:
-  - {fileID: 11400000, guid: 858ce7e602d6a744298aaa594ec7b0d3, type: 2}
-  - {fileID: 11400000, guid: 449748eb07bd16446b7a8d91a0cb6870, type: 2}
-  - {fileID: 11400000, guid: e07862716aa0404408a14a51879ce230, type: 2}
-  - {fileID: 11400000, guid: fe0675e02a16bae45a6738ab23d2fbe3, type: 2}
-  - {fileID: 11400000, guid: 68ed199dd0d714943a983fd19e62478e, type: 2}
-  - {fileID: 11400000, guid: b450f58d2a291f241a419766ac0ae130, type: 2}
-  - {fileID: 11400000, guid: 16b984eb1d19e154c801740f00aa971c, type: 2}
-  - {fileID: 11400000, guid: 364aa19a98b7f234fa45fdd7e02438cd, type: 2}
-  - {fileID: 11400000, guid: 8ed1a3c06cffe3e49b5e7bb2ef3818b2, type: 2}
-  - {fileID: 11400000, guid: d9a2cb2a9e50bd24aae721f124e57004, type: 2}
-  - {fileID: 11400000, guid: 5c8a03ea2533a6f4b93c94f2b65dda53, type: 2}
-  currentTile: {fileID: 0}
-  attachedCard: {fileID: 0}
   meshFilter: {fileID: 1341675763616237594}
   meshCollider: {fileID: 4448530858200871195}
   meshRenderer: {fileID: 7035315755774257745}

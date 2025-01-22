@@ -15,8 +15,6 @@ MonoBehaviour:
   cardType: 0
   cardName: Forest Tile
   Icon: {fileID: 453534303, guid: bde27041587826444b690a9ba948342c, type: 3}
-  tileType: 3
-  tileData: {fileID: 0}
-  tileTier: 1
+  tileData: {fileID: 11400000, guid: fe0675e02a16bae45a6738ab23d2fbe3, type: 2}
   structureType: 0
   structureObj: {fileID: 0}
