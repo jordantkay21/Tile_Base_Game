@@ -53,14 +53,34 @@ public class TileHandler : MonoBehaviour
     public MeshCollider meshCollider;
     public MeshRenderer meshRenderer;
     public GameObject tileObj;
-    public TileSide[] sides = new TileSide[4]; 
+    public TileSide[] sides = new TileSide[4];
 
-    [Header("Debugging Menu")]
+    [Header("Tile Data")]
+    public Vector2Int position;
     [ReadOnly, SerializeField] TileData _currentTile;
     [ReadOnly, SerializeField] CardData _attachedTileCard;
     [ReadOnly, SerializeField] CardData _attachedStructureCard;
 
-    [Button("Sync Side Data")]
+    [Header("Neighbor Tiles")]
+    public TileHandler TopNeighbor;
+    public TileHandler RightNeighbor;
+    public TileHandler BottomNeighbor;
+    public TileHandler LeftNeighbor;
+
+    [Header("Directions")]
+    public Vector2Int topDirection = new Vector2Int(1,0);
+    public Vector2Int rightDirection = new Vector2Int(0, 1);
+    public Vector2Int bottomDirection = new Vector2Int( -1,0);
+    public Vector2Int leftDirection = new Vector2Int(0,-1);
+
+    [Button("Detect Neighbors")]
+    public void DetectNeighbors()
+    {
+        TopNeighbor = GridManager.Instance.GetTile(position + topDirection);
+        RightNeighbor = GridManager.Instance.GetTile(position + rightDirection);
+        BottomNeighbor = GridManager.Instance.GetTile(position + bottomDirection);
+        LeftNeighbor = GridManager.Instance.GetTile(position + leftDirection);
+    }
     public void SyncSideData()
     {
         if (_currentTile.Tier != TileTier.Path) return;
@@ -106,8 +126,7 @@ public class TileHandler : MonoBehaviour
 
 
 
-    #region Tile Visual Logic
-    [Button("Update Visuals")]
+    #region Tile Data Sync Logic
     private void SetTileVisuals()
     {
         meshFilter.mesh = _currentTile.Mesh;

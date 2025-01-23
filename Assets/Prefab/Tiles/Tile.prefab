@@ -536,9 +536,18 @@ MonoBehaviour:
   - {fileID: 8604858630118216684}
   - {fileID: 2209992028624260140}
   - {fileID: 6745146063749923639}
+  position: {x: 0, y: 0}
   _currentTile: {fileID: 0}
   _attachedTileCard: {fileID: 0}
   _attachedStructureCard: {fileID: 0}
+  TopNeighbor: {fileID: 0}
+  RightNeighbor: {fileID: 0}
+  BottomNeighbor: {fileID: 0}
+  LeftNeighbor: {fileID: 0}
+  topDirection: {x: 1, y: 0}
+  rightDirection: {x: 0, y: 1}
+  bottomDirection: {x: -1, y: 0}
+  leftDirection: {x: 0, y: -1}
 --- !u!1 &8107124683219288000
 GameObject:
   m_ObjectHideFlags: 0
