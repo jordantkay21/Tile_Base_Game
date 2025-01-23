@@ -53,14 +53,44 @@ public class TileHandler : MonoBehaviour
     public MeshCollider meshCollider;
     public MeshRenderer meshRenderer;
     public GameObject tileObj;
-
-    [ShowInInspector]
-    public Dictionary<Side, TileSide> sides;
+    public TileSide[] sides = new TileSide[4]; 
 
     [Header("Debugging Menu")]
     [ReadOnly, SerializeField] TileData _currentTile;
     [ReadOnly, SerializeField] CardData _attachedTileCard;
     [ReadOnly, SerializeField] CardData _attachedStructureCard;
+
+    [Button("Sync Side Data")]
+    public void SyncSideData()
+    {
+        if (_currentTile.Tier != TileTier.Path) return;
+
+        switch (_currentTile.Type)
+        {
+            case TileType.Path_Straight:
+                SetSide(false, true, false, true);
+                break;
+            case TileType.Path_Turn:
+                SetSide(false, false, true, true);
+                break;
+            case TileType.Path_Tee:
+                SetSide(false, true, true, true);
+                break;
+            case TileType.Path_Cross:
+                SetSide(true, true, true, true);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void SetSide(bool topOpen, bool rightOpen, bool bottomOpen, bool leftOpen)
+    {
+        sides[0].isOpen = topOpen;
+        sides[1].isOpen = rightOpen;
+        sides[2].isOpen = bottomOpen;
+        sides[3].isOpen = leftOpen;
+    }
 
     public CardData GetCard(CardType cardType)
     {
@@ -74,45 +104,9 @@ public class TileHandler : MonoBehaviour
         return null;
     }
 
-    public void SyncSideData()
-    {
-        //Initialize the sides dictionary
-        sides = new Dictionary<Side, TileSide>();
-
-        //Loop through each Side in the enum
-        foreach (Side side in Enum.GetValues(typeof(Side)))
-        {
-            TileSide tileSide = new TileSide();
-
-            //Assign the TileSide based on the currentTile's corresponding side
-            switch (side)
-            {
-                case Side.Top:
-                    tileSide = _currentTile.TopSide;
-                    break;
-                case Side.Right:
-                    tileSide = _currentTile.RightSide;
-                    break;
-                case Side.Bottom:
-                    tileSide = _currentTile.BottomSide;
-                    break;
-                case Side.Left:
-                    tileSide = _currentTile.LeftSide;
-                    break;
-            }
-
-            if (tileSide != null)
-            {
-                tileSide.Side = side; // Ensure the Side enum is set correctly
-                sides.Add(side, tileSide);
-            }
-        }
 
 
-        Debug.Log("Sides synced with currentTile");
-    }
-
-
+    #region Tile Visual Logic
     [Button("Update Visuals")]
     private void SetTileVisuals()
     {
@@ -128,4 +122,5 @@ public class TileHandler : MonoBehaviour
         if (tileObj != null) Destroy(tileObj);
         tileObj = _attachedStructureCard.SpawnObj(transform);
     }
+    #endregion
 }

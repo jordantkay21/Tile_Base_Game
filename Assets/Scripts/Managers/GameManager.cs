@@ -4,6 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+[System.Serializable]
+public enum CardType
+{
+    TileCard,
+    StructureCard
+}
+ 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
@@ -40,6 +47,7 @@ public class GameManager : MonoBehaviour
 
     }
 
+    #region Input Logic
     private void HandleHover(Vector2 screenPos)
     {
         Ray ray = raycastCamera.ScreenPointToRay(screenPos);
@@ -68,6 +76,7 @@ public class GameManager : MonoBehaviour
             DeselectTile();
         }
     }
+    #endregion
 
     #region Tile Selection Logic
 
@@ -98,6 +107,8 @@ public class GameManager : MonoBehaviour
     }
 
     #endregion
+
+    #region Tile Data Logic
 
     public void AttachCard(CardData newCard)
     {
@@ -136,4 +147,6 @@ public class GameManager : MonoBehaviour
 
         return null;
     }
+    
+    #endregion
 }

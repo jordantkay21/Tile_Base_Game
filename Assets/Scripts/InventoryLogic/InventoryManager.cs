@@ -2,12 +2,7 @@ using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public enum CardType
-{
-    TileCard,
-    StructureCard
-}
+
 
 
 
