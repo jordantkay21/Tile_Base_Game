@@ -53,7 +53,6 @@ public class TileHandler : MonoBehaviour
     public MeshCollider meshCollider;
     public MeshRenderer meshRenderer;
     public GameObject tileObj;
-    public TileSide[] sides = new TileSide[4];
 
     [Header("Tile Data")]
     public Vector2Int position;
@@ -62,24 +61,110 @@ public class TileHandler : MonoBehaviour
     [ReadOnly, SerializeField] CardData _attachedStructureCard;
 
     [Header("Neighbor Tiles")]
+    public TileHandler[] neighborTiles = new TileHandler[4];
     public TileHandler TopNeighbor;
     public TileHandler RightNeighbor;
     public TileHandler BottomNeighbor;
     public TileHandler LeftNeighbor;
 
-    [Header("Directions")]
-    public Vector2Int topDirection = new Vector2Int(1,0);
-    public Vector2Int rightDirection = new Vector2Int(0, 1);
-    public Vector2Int bottomDirection = new Vector2Int( -1,0);
-    public Vector2Int leftDirection = new Vector2Int(0,-1);
+    [Header("Side Detection Logic")]
+    public TileSide[] sides = new TileSide[4];
+    public Vector2Int[] sideDirections = new Vector2Int[]
+    {
+    new Vector2Int(1, 0),  // Top direction
+    new Vector2Int(0, 1),  // Right direction
+    new Vector2Int(-1, 0), // Bottom direction
+    new Vector2Int(0, -1)  // Left direction
+    };
+
+    [ShowInInspector]
+    public Dictionary<Vector2Int, TileSide> sideDirectionMap;
+
+
+    private void OnEnable()
+    {
+        //Initialize the dictionary
+        sideDirectionMap = new Dictionary<Vector2Int, TileSide>();
+
+        //Populate the dictionary by matching elements
+        for (int i = 0; i < sides.Length && i < sideDirections.Length; i++)
+        {
+            if (sides[i] != null)
+            {
+                sideDirectionMap[sideDirections[i]] = sides[i];
+            }
+        }
+    }
+
+    public void ReconfigureSideDirectionMap()
+    {
+        sideDirectionMap.Clear(); // Clear the current map
+
+        // Rebuild the map with updated side directions
+        for (int i = 0; i < sides.Length && i < sideDirections.Length; i++)
+        {
+            if (sides[i] != null)
+            {
+                sideDirectionMap[sideDirections[i]] = sides[i];
+            }
+        }
+    }
 
     [Button("Detect Neighbors")]
     public void DetectNeighbors()
     {
-        TopNeighbor = GridManager.Instance.GetTile(position + topDirection);
-        RightNeighbor = GridManager.Instance.GetTile(position + rightDirection);
-        BottomNeighbor = GridManager.Instance.GetTile(position + bottomDirection);
-        LeftNeighbor = GridManager.Instance.GetTile(position + leftDirection);
+        //Iterate through each side and determine if a path is present
+
+        foreach (KeyValuePair<Vector2Int, TileSide> entry in sideDirectionMap)
+        {
+            Vector2Int direction = entry.Key;     //The direction vector
+            TileSide side = entry.Value;              //The current side
+
+            //Get the neighboring tile
+            TileHandler neighbor = GridManager.Instance.GetTile(position + direction);
+
+            if (neighbor != null && neighbor.CurrentTile.Tier == TileTier.Path)
+            {
+                Debug.Log($"Neighbor on {side} is a path tile: {neighbor.name}");
+                side.SideDetection(this, out bool isMatching);
+
+                if (isMatching)
+                {
+                    Debug.Log($"Tile Sides are matching.");
+                }
+                else
+                {
+                    Debug.Log("Tile Sides are not matching.");
+                    RotateTile(90);
+                }
+            }
+        }
+
+    }
+
+    public void RotateTile(int degrees)
+    {
+        transform.Rotate(0, degrees, 0); // Rotates the GameObject 90 degrees around the Y-axis
+
+        RotateSideDirections(degrees); //Update side directions
+        ReconfigureSideDirectionMap();
+    }
+
+    private void RotateSideDirections(int degrees)
+    {
+        // Number of 90-degree steps
+        int steps = (degrees / 90) % 4;
+
+        //Rotate directions
+        for (int i = 0; i < steps; i++)
+        {
+            for (int j = 0; j < sideDirections.Length; j++)
+            {
+                Vector2Int dir = sideDirections[j];
+                //Rotate 90 degrees clockwise
+                sideDirections[j] = new Vector2Int(-dir.y, dir.x);
+            }
+        }
     }
     public void SyncSideData()
     {
@@ -111,6 +196,7 @@ public class TileHandler : MonoBehaviour
         sides[2].isOpen = bottomOpen;
         sides[3].isOpen = leftOpen;
     }
+
 
     public CardData GetCard(CardType cardType)
     {

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2209992028624260140}
   m_Layer: 0
   m_Name: Bottom
-  m_TagString: Untagged
+  m_TagString: Tile_Side
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 8604858630118216684}
   m_Layer: 0
   m_Name: Right
-  m_TagString: Untagged
+  m_TagString: Tile_Side
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -296,7 +296,7 @@ GameObject:
   - component: {fileID: 8998353274813127895}
   m_Layer: 0
   m_Name: Top
-  m_TagString: Untagged
+  m_TagString: Tile_Side
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -419,7 +419,7 @@ GameObject:
   - component: {fileID: 368130528789233428}
   m_Layer: 3
   m_Name: Tile
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -531,23 +531,29 @@ MonoBehaviour:
   meshCollider: {fileID: 4448530858200871195}
   meshRenderer: {fileID: 7035315755774257745}
   tileObj: {fileID: 0}
+  position: {x: 0, y: 0}
+  _currentTile: {fileID: 0}
+  _attachedTileCard: {fileID: 0}
+  _attachedStructureCard: {fileID: 0}
+  neighborTiles:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  TopNeighbor: {fileID: 0}
+  RightNeighbor: {fileID: 0}
+  BottomNeighbor: {fileID: 0}
+  LeftNeighbor: {fileID: 0}
   sides:
   - {fileID: 8998353274813127895}
   - {fileID: 8604858630118216684}
   - {fileID: 2209992028624260140}
   - {fileID: 6745146063749923639}
-  position: {x: 0, y: 0}
-  _currentTile: {fileID: 0}
-  _attachedTileCard: {fileID: 0}
-  _attachedStructureCard: {fileID: 0}
-  TopNeighbor: {fileID: 0}
-  RightNeighbor: {fileID: 0}
-  BottomNeighbor: {fileID: 0}
-  LeftNeighbor: {fileID: 0}
-  topDirection: {x: 1, y: 0}
-  rightDirection: {x: 0, y: 1}
-  bottomDirection: {x: -1, y: 0}
-  leftDirection: {x: 0, y: -1}
+  sideDirections:
+  - {x: 1, y: 0}
+  - {x: 0, y: 1}
+  - {x: -1, y: 0}
+  - {x: 0, y: -1}
 --- !u!1 &8107124683219288000
 GameObject:
   m_ObjectHideFlags: 0
@@ -563,7 +569,7 @@ GameObject:
   - component: {fileID: 6745146063749923639}
   m_Layer: 0
   m_Name: Left
-  m_TagString: Untagged
+  m_TagString: Tile_Side
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

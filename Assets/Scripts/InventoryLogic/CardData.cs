@@ -31,7 +31,7 @@ public class CardData : ScriptableObject
 
     public GameObject SpawnObj(Transform parent = null)
     {
-        Debug.Log("SpawnObj Called");
+        //Debug.Log("SpawnObj Called");
         if (structureObj == null) return null;
 
         GameObject spawnedObj = Instantiate(structureObj, parent, false);

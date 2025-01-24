@@ -26,7 +26,7 @@ public class UIManager : MonoBehaviour
     private void OpenUIMenu(GameObject tile)
     {
         TileHandler tHandler = tile.GetComponent<TileHandler>();
-        Debug.Log($"Selected tile: {tile.name} \nTile Type {tHandler.CurrentTile.Type}");
+        //Debug.Log($"Selected tile: {tile.name} \nTile Type {tHandler.CurrentTile.Type}");
 
         switch (tHandler.CurrentTile.Type)
         {
@@ -97,7 +97,7 @@ public class UIManager : MonoBehaviour
     }
     private void DeselectTile()
     {
-        Debug.Log("Deselecting Tile");
+        //Debug.Log("Deselecting Tile");
         tileCardPanel.HidePanel();
         confirmWindow.HideConfirmation();
         selectionIndicator.gameObject.SetActive(false);

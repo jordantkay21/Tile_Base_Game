@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
 
     public void AttachCard(CardData newCard)
     {
-        Debug.Log($"{newCard.cardType} was clicked");
+        //Debug.Log($"{newCard.cardType} was clicked");
         if(selectedTile != null)
         {
             TileHandler tileData = selectedTile.GetComponent <TileHandler>();
@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("SelectedTile is NULL");
+            //Debug.Log("SelectedTile is NULL");
         }
 
     }

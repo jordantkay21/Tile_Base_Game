@@ -51,7 +51,7 @@ public enum StructureType
 public class GridManager : MonoBehaviour
 {
     public static GridManager Instance;
-
+    public LayerMask GridLayer;
 
 
     [Header("Grid Generation Properties")]

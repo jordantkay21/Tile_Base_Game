@@ -12,7 +12,7 @@ public class TileData : ScriptableObject
 
     public GameObject SpawnObj(Transform parent = null)
     {
-        Debug.Log("SpawnObj Called");
+        //Debug.Log("SpawnObj Called");
         if (TileObj == null) return null;
 
         GameObject spawnedObj = Instantiate(TileObj,parent, false);
