@@ -86,7 +86,7 @@ public class TileHandler : MonoBehaviour
         foreach(SideDirection side in directionMap)
         {
             //Debug.Log($"{transform.name} | Attempting to detect neighbor on side {side.type}. " +
-               //$"\n Checking Grid Corridinates: {position} + {side.direction} = {position + side.direction}");
+              //$"\n Checking Grid Corridinates: {position} + {side.direction} = {position + side.direction}");
 
             TileHandler neighbor = GridManager.Instance.GetTile(position + side.direction);
 
@@ -103,7 +103,7 @@ public class TileHandler : MonoBehaviour
 
     public SideType DetectNeighbors()
     {
-        Debug.Log("Detecting Paths");
+        //Debug.Log("Detecting Paths");
         foreach (KeyValuePair<SideType, TileHandler> kvp in neighboringTilesMap)
         {
             SideType side = kvp.Key;
@@ -113,13 +113,13 @@ public class TileHandler : MonoBehaviour
 
             if(neighbor.CurrentTile.Tier == TileTier.Path)
             {
-                Debug.Log($"OBJ: {transform.name} | {neighbor.name} has been detected as a path on the {side} side. Attempting to rotate.");
+                //Debug.Log($"OBJ: {transform.name} | {neighbor.name} has been detected as a path on the {side} side. Attempting to rotate.");
                 return side;
             }  
         }
 
-        Debug.LogWarning($"No path detected for {transform.name}");
-        return default; 
+        //Debug.LogWarning($"No path detected for {transform.name}");
+        return SideType.Right; 
     }
     #endregion
 
@@ -142,7 +142,7 @@ public class TileHandler : MonoBehaviour
         //Ensure the requirement exsists
         if (requirement == null)
         {
-            Debug.LogError($"No rotation requirements found for side: {side}");
+            //Debug.LogError($"No rotation requirements found for side: {side}");
             return;
         }
 
@@ -162,14 +162,14 @@ public class TileHandler : MonoBehaviour
         //Update current rotation
         currentRotation = nextRotation;
 
-        Debug.Log($"Tile rotated to {currentRotation}° relative to original for side {side}.");
+        //Debug.Log($"Tile rotated to {currentRotation}° relative to original for side {side}.");
     }
 
     public void RotateTile(int degrees)
     {
         transform.Rotate(0, degrees, 0); // Rotates the GameObject 90 degrees around the Y-axis
 
-        Debug.Log($"Tile rotated by {degrees}°.");
+        //Debug.Log($"Tile rotated by {degrees}°.");
     }
     #endregion
 

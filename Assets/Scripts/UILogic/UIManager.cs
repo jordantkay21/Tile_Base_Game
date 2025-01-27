@@ -4,6 +4,8 @@ using UnityEngine.EventSystems;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager Instance;
+
     [Header("Dynamic UI Elements")]
     public ConfirmationWindow confirmWindow;
     public TileCardPanel tileCardPanel;
@@ -12,8 +14,24 @@ public class UIManager : MonoBehaviour
     [Header("Tile Selection Logic")]
     public Transform hoverIndicator;
     public Transform selectionIndicator;
-    
+    public bool isPointerOverUI;
 
+    private void Update()
+    {
+        isPointerOverUI = EventSystem.current.IsPointerOverGameObject();
+    }
+
+    private void Awake()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
     private void OnEnable()
     {
         GameManager.OnTileHovered += HighlightHoverTile;
@@ -116,7 +134,7 @@ public class UIManager : MonoBehaviour
 
     private bool IsPointerOverUIElement()
     {
-        return EventSystem.current.IsPointerOverGameObject();
+        return isPointerOverUI;
     }
 
     #endregion

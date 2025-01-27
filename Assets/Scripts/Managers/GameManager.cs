@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
 
     private void HandleSelect()
     {
-        if (IsPointerOverUIElement()) return;
+        if (UIManager.Instance.isPointerOverUI) return;
 
         if (hoveredTile != null)
         {
@@ -96,11 +96,6 @@ public class GameManager : MonoBehaviour
         selectedTile = tile;
 
         OnTileSelected.Invoke(tile);
-    }
-
-    private bool IsPointerOverUIElement()
-    {
-        return EventSystem.current.IsPointerOverGameObject();
     }
 
     private void DeselectTile()

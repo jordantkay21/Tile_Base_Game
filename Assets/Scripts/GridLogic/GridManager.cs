@@ -105,7 +105,7 @@ public class GridManager : MonoBehaviour
                 tHandler.position = new Vector2Int(row, column);
                 tHandler.CurrentTile = GameManager.Instance.GetTileData(TileType.Locked);
 
-                gridTiles[column, row] = tileGO;
+                gridTiles[row, column] = tileGO;
             }
         }
 
@@ -143,13 +143,13 @@ public class GridManager : MonoBehaviour
 
         if (row < 0 || row >= gridTiles.GetLength(0) || column < 0 || column >= gridTiles.GetLength(1))
         {
-            Debug.LogWarning($"Tile position {tilePos} is out of bounds.");
+            //Debug.LogWarning($"Tile position {tilePos} is out of bounds.");
             return null; // Return null if the position is invalid
         }
 
         if (gridTiles[row,column] == null)
         {
-            Debug.LogWarning($"No tile exists at position {tilePos}");
+            //Debug.LogWarning($"No tile exists at position {tilePos}");
             return null;
         }
 

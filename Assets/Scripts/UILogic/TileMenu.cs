@@ -30,25 +30,25 @@ public class TileMenu : MonoBehaviour
 
         if (rm_accept != null)
         {
-            Debug.Log("Listeners Added to Accept Button");
+            //Debug.Log("Listeners Added to Accept Button");
             rm_accept.onClick.AddListener(OnRotateAcceptClick);
         }
 
         if (rm_rotate != null)
         {
-            Debug.Log("Listeners Added to Rotate Button");
+            //Debug.Log("Listeners Added to Rotate Button");
             rm_rotate.onClick.AddListener(OnRotateClick);
         }
     }
 
     public void OnRotateClick()
     {
-        Debug.Log("Rotate Tile Button Clicked");
+        //Debug.Log("Rotate Tile Button Clicked");
         rotateTile.RotateTileToNextAngle(rotateTile.DetectNeighbors());
     }
     public void OnRotateAcceptClick()
     {
-        Debug.Log("Rotate Menu Accept Button Clicked");
+        //Debug.Log("Rotate Menu Accept Button Clicked");
         HideRotateMenu();
         
     }
