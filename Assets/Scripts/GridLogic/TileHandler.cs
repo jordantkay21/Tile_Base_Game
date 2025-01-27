@@ -104,6 +104,25 @@ public class TileHandler : MonoBehaviour
             //Debug.Log($"OBJ: {transform.name} | {neighbor} was detected as a neighbor on the {side.type} side");
             cardinalNeighboringTilesMap.Add(side.type, neighbor);
         }
+
+        intercardinalNeighboringTilesMap = new Dictionary<SideType, TileHandler>();
+
+        foreach (SideDirection side in intercardinalDirectionMap)
+        {
+            //Debug.Log($"{transform.name} | Attempting to detect neighbor on side {side.type}. " +
+            //$"\n Checking Grid Corridinates: {position} + {side.direction} = {position + side.direction}");
+
+            TileHandler neighbor = GridManager.Instance.GetTile(position + side.direction);
+
+            if (neighbor == null)
+            {
+                //Debug.Log($"{transform.name} | No neighboring tile detected on side {side.type}");
+                continue;
+            }
+
+            //Debug.Log($"OBJ: {transform.name} | {neighbor} was detected as a neighbor on the {side.type} side");
+            intercardinalNeighboringTilesMap.Add(side.type, neighbor);
+        }
     }
 
     public SideType DetectNeighbors()
