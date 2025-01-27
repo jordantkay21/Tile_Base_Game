@@ -39,7 +39,11 @@ public enum SideType
     Top,
     Right,
     Bottom,
-    Left
+    Left,
+    TopRight,
+    BottomRight,
+    BottomLeft,
+    TopLeft
 }
 
 [System.Serializable]
