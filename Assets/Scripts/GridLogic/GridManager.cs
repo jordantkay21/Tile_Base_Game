@@ -118,6 +118,8 @@ public class GridManager : MonoBehaviour
 
         DetectCenterTile();
 
+        SpawnPathAroundCenter();
+
         gridInitilized = true;
     }
 
@@ -134,6 +136,18 @@ public class GridManager : MonoBehaviour
         TileHandler tHandler = centerTile.GetComponent<TileHandler>();
         tHandler.CurrentTile = GameManager.Instance.GetTileData(TileType.Path_Cross);
         tHandler.AttachedCard = GameManager.Instance.GetStructureCard(StructureType.Base);
+    }
+
+    public void SpawnPathAroundCenter()
+    {
+        TileHandler tHandler = centerTile.GetComponent<TileHandler>();
+
+        foreach (var kvp in tHandler.neighboringTilesMap)
+        {
+            TileHandler neighbor = kvp.Value;
+
+            neighbor.CurrentTile = GameManager.Instance.GetTileData(TileType.Path_Straight);
+        }
     }
 
     public TileHandler GetTile(Vector2Int tilePos)

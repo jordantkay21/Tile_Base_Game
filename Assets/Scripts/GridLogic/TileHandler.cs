@@ -9,9 +9,9 @@ public class TileHandler : MonoBehaviour
     [ShowInInspector]
     public TileData CurrentTile
     {
-        get 
-        { 
-            return _currentTile; 
+        get
+        {
+            return _currentTile;
         }
 
         set
@@ -19,10 +19,11 @@ public class TileHandler : MonoBehaviour
             _currentTile = value;
             SetTileVisuals();
 
-            if(value.Tier == TileTier.Path && GridManager.Instance.gridInitilized)
+            if (value.Tier == TileTier.Path)
             {
                 RotateTileToNextAngle(DetectNeighbors());
-                GameManager.Instance.PathSpawn(this);
+                if (GridManager.Instance.gridInitilized)
+                    GameManager.Instance.PathSpawn(this);
             }
         }
     }
@@ -83,10 +84,10 @@ public class TileHandler : MonoBehaviour
     {
         neighboringTilesMap = new Dictionary<SideType, TileHandler>();
 
-        foreach(SideDirection side in directionMap)
+        foreach (SideDirection side in directionMap)
         {
             //Debug.Log($"{transform.name} | Attempting to detect neighbor on side {side.type}. " +
-              //$"\n Checking Grid Corridinates: {position} + {side.direction} = {position + side.direction}");
+            //$"\n Checking Grid Corridinates: {position} + {side.direction} = {position + side.direction}");
 
             TileHandler neighbor = GridManager.Instance.GetTile(position + side.direction);
 
@@ -97,8 +98,8 @@ public class TileHandler : MonoBehaviour
             }
 
             //Debug.Log($"OBJ: {transform.name} | {neighbor} was detected as a neighbor on the {side.type} side");
-            neighboringTilesMap.Add(side.type, neighbor);  
-        }       
+            neighboringTilesMap.Add(side.type, neighbor);
+        }
     }
 
     public SideType DetectNeighbors()
@@ -111,15 +112,15 @@ public class TileHandler : MonoBehaviour
 
             if (neighbor == null) continue;
 
-            if(neighbor.CurrentTile.Tier == TileTier.Path)
+            if (neighbor.CurrentTile.Tier == TileTier.Path)
             {
                 //Debug.Log($"OBJ: {transform.name} | {neighbor.name} has been detected as a path on the {side} side. Attempting to rotate.");
                 return side;
-            }  
+            }
         }
 
         //Debug.LogWarning($"No path detected for {transform.name}");
-        return SideType.Right; 
+        return SideType.Right;
     }
     #endregion
 
