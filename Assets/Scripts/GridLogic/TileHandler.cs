@@ -71,9 +71,13 @@ public class TileHandler : MonoBehaviour
 
     [ShowInInspector, ReadOnly]
     public Dictionary<SideType, TileHandler> cardinalNeighboringTilesMap;
+    [ShowInInspector, ReadOnly]
+    public Dictionary<SideType, TileHandler> intercardinalNeighboringTilesMap;
 
     [ShowInInspector]
     public SideDirection[] cardinalDirectionMap = new SideDirection[4];
+    [ShowInInspector]
+    public SideDirection[] intercardinalDirectionMap = new SideDirection[4];
 
     private int currentRotation = 0;
 

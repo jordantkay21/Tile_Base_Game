@@ -139,3 +139,12 @@ MonoBehaviour:
     direction: {x: -1, y: 0}
   - type: 3
     direction: {x: 0, y: -1}
+  intercardinalDirectionMap:
+  - type: 4
+    direction: {x: 1, y: 1}
+  - type: 5
+    direction: {x: -1, y: 1}
+  - type: 6
+    direction: {x: -1, y: -1}
+  - type: 7
+    direction: {x: 1, y: -1}
