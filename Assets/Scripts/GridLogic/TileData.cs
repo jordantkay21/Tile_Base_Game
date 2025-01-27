@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewTileType", menuName = "Tile Types/New Tile Type")]
@@ -10,6 +11,11 @@ public class TileData : ScriptableObject
     public Material Material;
     public GameObject TileObj;
 
+    [ShowInInspector, ShowIf("Tier", TileTier.Path)]
+    [TitleGroup("Rotation Needs", "Rotations needed to connect open sides together")]
+    [DictionaryDrawerSettings(KeyLabel = "Side", ValueLabel = "Rotations")]
+    public List<RotationRequirement> rotationRequirements = new List<RotationRequirement>();
+
     public GameObject SpawnObj(Transform parent = null)
     {
         //Debug.Log("SpawnObj Called");
@@ -18,4 +24,27 @@ public class TileData : ScriptableObject
         GameObject spawnedObj = Instantiate(TileObj,parent, false);
         return spawnedObj;
     }
+}
+
+[System.Serializable]
+public class RotationRequirement
+{
+    public SideType side;
+    public int[] allowedRotations;
+}
+
+[System.Serializable]
+public enum SideType
+{
+    Top,
+    Right,
+    Bottom,
+    Left
+}
+
+[System.Serializable]
+public class SideDirection
+{
+    public SideType type;
+    public Vector2Int direction;
 }

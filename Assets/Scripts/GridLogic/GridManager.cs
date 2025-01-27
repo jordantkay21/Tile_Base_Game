@@ -107,6 +107,13 @@ public class GridManager : MonoBehaviour
             }
         }
 
+        foreach(var tile in gridTiles)
+        {
+            TileHandler tHandler = tile.GetComponent<TileHandler>();
+
+            tHandler.CacheNeighbors();
+        }
+
         DetectCenterTile();
     }
 

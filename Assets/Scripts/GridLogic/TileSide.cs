@@ -6,15 +6,6 @@ public class SideData
     public bool isOpen;
 }
 
-[System.Serializable]
-public enum SideType
-{
-    Top,
-    Right,
-    Bottom,
-    Left
-}
-
 public class TileSide : MonoBehaviour
 {
     public SideType side;

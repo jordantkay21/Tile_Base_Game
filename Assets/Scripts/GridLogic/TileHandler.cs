@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class TileHandler : MonoBehaviour
 {
+    #region Properties
     [ShowInInspector]
     public TileData CurrentTile
     {
@@ -17,7 +18,11 @@ public class TileHandler : MonoBehaviour
         {
             _currentTile = value;
             SetTileVisuals();
-            SyncSideData();
+
+            if(value.Tier == TileTier.Path)
+            {
+                DetectNeighbors();
+            }
         }
     }
     [ShowInInspector]
@@ -47,7 +52,9 @@ public class TileHandler : MonoBehaviour
 
         }
     }
+    #endregion
 
+    #region Variables
     [Header("Tile Components")]
     public MeshFilter meshFilter;
     public MeshCollider meshCollider;
@@ -60,143 +67,107 @@ public class TileHandler : MonoBehaviour
     [ReadOnly, SerializeField] CardData _attachedTileCard;
     [ReadOnly, SerializeField] CardData _attachedStructureCard;
 
-    [Header("Neighbor Tiles")]
-    public TileHandler[] neighborTiles = new TileHandler[4];
-    public TileHandler TopNeighbor;
-    public TileHandler RightNeighbor;
-    public TileHandler BottomNeighbor;
-    public TileHandler LeftNeighbor;
-
-    [Header("Side Detection Logic")]
-    public TileSide[] sides = new TileSide[4];
-    public Vector2Int[] sideDirections = new Vector2Int[]
-    {
-    new Vector2Int(1, 0),  // Top direction
-    new Vector2Int(0, 1),  // Right direction
-    new Vector2Int(-1, 0), // Bottom direction
-    new Vector2Int(0, -1)  // Left direction
-    };
+    [ShowInInspector, ReadOnly]
+    public Dictionary<SideType, TileHandler> neighboringTilesMap;
 
     [ShowInInspector]
-    public Dictionary<Vector2Int, TileSide> sideDirectionMap;
+    public SideDirection[] directionMap = new SideDirection[4];
 
+    private int currentRotation = 0;
 
-    private void OnEnable()
+    #endregion
+
+    #region Detection Logic
+    public void CacheNeighbors()
     {
-        //Initialize the dictionary
-        sideDirectionMap = new Dictionary<Vector2Int, TileSide>();
+        neighboringTilesMap = new Dictionary<SideType, TileHandler>();
 
-        //Populate the dictionary by matching elements
-        for (int i = 0; i < sides.Length && i < sideDirections.Length; i++)
+        foreach(SideDirection side in directionMap)
         {
-            if (sides[i] != null)
+            //Debug.Log($"{transform.name} | Attempting to detect neighbor on side {side.type}. " +
+               //$"\n Checking Grid Corridinates: {position} + {side.direction} = {position + side.direction}");
+
+            TileHandler neighbor = GridManager.Instance.GetTile(position + side.direction);
+
+            if (neighbor == null)
             {
-                sideDirectionMap[sideDirections[i]] = sides[i];
+                //Debug.Log($"{transform.name} | No neighboring tile detected on side {side.type}");
+                continue;
             }
-        }
+
+            //Debug.Log($"OBJ: {transform.name} | {neighbor} was detected as a neighbor on the {side.type} side");
+            neighboringTilesMap.Add(side.type, neighbor);  
+        }       
     }
 
-    public void ReconfigureSideDirectionMap()
-    {
-        sideDirectionMap.Clear(); // Clear the current map
-
-        // Rebuild the map with updated side directions
-        for (int i = 0; i < sides.Length && i < sideDirections.Length; i++)
-        {
-            if (sides[i] != null)
-            {
-                sideDirectionMap[sideDirections[i]] = sides[i];
-            }
-        }
-    }
-
-    [Button("Detect Neighbors")]
     public void DetectNeighbors()
     {
-        //Iterate through each side and determine if a path is present
-
-        foreach (KeyValuePair<Vector2Int, TileSide> entry in sideDirectionMap)
+        Debug.Log("Detecting Paths");
+        foreach (KeyValuePair<SideType, TileHandler> kvp in neighboringTilesMap)
         {
-            Vector2Int direction = entry.Key;     //The direction vector
-            TileSide side = entry.Value;              //The current side
+            SideType side = kvp.Key;
+            TileHandler neighbor = kvp.Value;
 
-            //Get the neighboring tile
-            TileHandler neighbor = GridManager.Instance.GetTile(position + direction);
+            if (neighbor == null) continue;
 
-            if (neighbor != null && neighbor.CurrentTile.Tier == TileTier.Path)
+            if(neighbor.CurrentTile.Tier == TileTier.Path)
             {
-                Debug.Log($"Neighbor on {side} is a path tile: {neighbor.name}");
-                side.SideDetection(this, out bool isMatching);
-
-                if (isMatching)
-                {
-                    Debug.Log($"Tile Sides are matching.");
-                }
-                else
-                {
-                    Debug.Log("Tile Sides are not matching.");
-                    RotateTile(90);
-                }
+                Debug.Log($"OBJ: {transform.name} | {neighbor.name} has been detected as a path on the {side} side. Attempting to rotate.");
+                RotateTileToNextAngle(side);
             }
         }
+    }
+    #endregion
 
+    #region Rotation Logic
+    /// <summary>
+    /// Rotates tile to the next allowed angle for a given SideType. Ensures that:
+    /// <list type="bullet">
+    /// <item><description>The tile only rotates to predefined angles.</description></item>
+    /// <item><description>The rotation is relative to the tile's original orientation.</description></item>
+    /// </list>
+    /// </summary>
+    /// <param name="tileData"></param>
+    /// <param name="side"></param>
+    public void RotateTileToNextAngle(SideType side)
+    {
+
+        //Find the RotationRequirment for the given side
+        RotationRequirement requirement = CurrentTile.rotationRequirements.Find(req => req.side == side);
+
+        //Ensure the requirement exsists
+        if (requirement == null)
+        {
+            Debug.LogError($"No rotation requirements found for side: {side}");
+            return;
+        }
+
+        //Get the allowed rotations from the requirement
+        int[] allowedRotations = requirement.allowedRotations;
+
+        //Find the next rotation in the sequence
+        int nextRotationIndex = (Array.IndexOf(allowedRotations, currentRotation) + 1) % allowedRotations.Length;
+        int nextRotation = allowedRotations[nextRotationIndex];
+
+        //Calculate the rotation delta
+        int rotationDelta = (nextRotation - currentRotation + 360) % 360;
+
+        //Apply the Rotation
+        RotateTile(rotationDelta);
+
+        //Update current rotation
+        currentRotation = nextRotation;
+
+        Debug.Log($"Tile rotated to {currentRotation}° relative to original for side {side}.");
     }
 
     public void RotateTile(int degrees)
     {
         transform.Rotate(0, degrees, 0); // Rotates the GameObject 90 degrees around the Y-axis
 
-        RotateSideDirections(degrees); //Update side directions
-        ReconfigureSideDirectionMap();
+        Debug.Log($"Tile rotated by {degrees}°.");
     }
-
-    private void RotateSideDirections(int degrees)
-    {
-        // Number of 90-degree steps
-        int steps = (degrees / 90) % 4;
-
-        //Rotate directions
-        for (int i = 0; i < steps; i++)
-        {
-            for (int j = 0; j < sideDirections.Length; j++)
-            {
-                Vector2Int dir = sideDirections[j];
-                //Rotate 90 degrees clockwise
-                sideDirections[j] = new Vector2Int(-dir.y, dir.x);
-            }
-        }
-    }
-    public void SyncSideData()
-    {
-        if (_currentTile.Tier != TileTier.Path) return;
-
-        switch (_currentTile.Type)
-        {
-            case TileType.Path_Straight:
-                SetSide(false, true, false, true);
-                break;
-            case TileType.Path_Turn:
-                SetSide(false, false, true, true);
-                break;
-            case TileType.Path_Tee:
-                SetSide(false, true, true, true);
-                break;
-            case TileType.Path_Cross:
-                SetSide(true, true, true, true);
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void SetSide(bool topOpen, bool rightOpen, bool bottomOpen, bool leftOpen)
-    {
-        sides[0].isOpen = topOpen;
-        sides[1].isOpen = rightOpen;
-        sides[2].isOpen = bottomOpen;
-        sides[3].isOpen = leftOpen;
-    }
-
+    #endregion
 
     public CardData GetCard(CardType cardType)
     {
