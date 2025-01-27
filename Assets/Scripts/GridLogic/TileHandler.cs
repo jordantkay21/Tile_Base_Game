@@ -70,10 +70,10 @@ public class TileHandler : MonoBehaviour
     [ReadOnly, SerializeField] CardData _attachedStructureCard;
 
     [ShowInInspector, ReadOnly]
-    public Dictionary<SideType, TileHandler> neighboringTilesMap;
+    public Dictionary<SideType, TileHandler> cardinalNeighboringTilesMap;
 
     [ShowInInspector]
-    public SideDirection[] directionMap = new SideDirection[4];
+    public SideDirection[] cardinalDirectionMap = new SideDirection[4];
 
     private int currentRotation = 0;
 
@@ -82,9 +82,9 @@ public class TileHandler : MonoBehaviour
     #region Detection Logic
     public void CacheNeighbors()
     {
-        neighboringTilesMap = new Dictionary<SideType, TileHandler>();
+        cardinalNeighboringTilesMap = new Dictionary<SideType, TileHandler>();
 
-        foreach (SideDirection side in directionMap)
+        foreach (SideDirection side in cardinalDirectionMap)
         {
             //Debug.Log($"{transform.name} | Attempting to detect neighbor on side {side.type}. " +
             //$"\n Checking Grid Corridinates: {position} + {side.direction} = {position + side.direction}");
@@ -98,14 +98,14 @@ public class TileHandler : MonoBehaviour
             }
 
             //Debug.Log($"OBJ: {transform.name} | {neighbor} was detected as a neighbor on the {side.type} side");
-            neighboringTilesMap.Add(side.type, neighbor);
+            cardinalNeighboringTilesMap.Add(side.type, neighbor);
         }
     }
 
     public SideType DetectNeighbors()
     {
         //Debug.Log("Detecting Paths");
-        foreach (KeyValuePair<SideType, TileHandler> kvp in neighboringTilesMap)
+        foreach (KeyValuePair<SideType, TileHandler> kvp in cardinalNeighboringTilesMap)
         {
             SideType side = kvp.Key;
             TileHandler neighbor = kvp.Value;

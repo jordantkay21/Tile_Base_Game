@@ -142,7 +142,7 @@ public class GridManager : MonoBehaviour
     {
         TileHandler tHandler = centerTile.GetComponent<TileHandler>();
 
-        foreach (var kvp in tHandler.neighboringTilesMap)
+        foreach (var kvp in tHandler.cardinalNeighboringTilesMap)
         {
             TileHandler neighbor = kvp.Value;
 

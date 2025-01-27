@@ -130,7 +130,7 @@ MonoBehaviour:
   _currentTile: {fileID: 0}
   _attachedTileCard: {fileID: 0}
   _attachedStructureCard: {fileID: 0}
-  directionMap:
+  cardinalDirectionMap:
   - type: 0
     direction: {x: 1, y: 0}
   - type: 1
