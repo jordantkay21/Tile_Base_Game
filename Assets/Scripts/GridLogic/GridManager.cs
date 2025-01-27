@@ -64,6 +64,8 @@ public class GridManager : MonoBehaviour
     public GameObject[,] gridTiles;
     public GameObject centerTile;
 
+    public bool gridInitilized = false;
+
     private void Awake()
     {
         if(Instance == null)
@@ -115,6 +117,8 @@ public class GridManager : MonoBehaviour
         }
 
         DetectCenterTile();
+
+        gridInitilized = true;
     }
 
     public void DetectCenterTile()

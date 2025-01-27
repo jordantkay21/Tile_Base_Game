@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     public static event Action<GameObject> OnTileSelected;
     public static event Action<GameObject> OnTileHovered;
     public static event Action OnTileDefined;
+    public static event Action<TileHandler, TileMenuType> OnPathSpawned;
 
     private void Awake()
     {
@@ -45,6 +46,11 @@ public class GameManager : MonoBehaviour
         InputManager.OnHover += HandleHover;
         InputManager.OnSelect += HandleSelect;
 
+    }
+
+    public void PathSpawn(TileHandler tile)
+    {
+        OnPathSpawned?.Invoke(tile, TileMenuType.Rotate);
     }
 
     #region Input Logic

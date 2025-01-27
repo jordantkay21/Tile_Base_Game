@@ -19,9 +19,10 @@ public class TileHandler : MonoBehaviour
             _currentTile = value;
             SetTileVisuals();
 
-            if(value.Tier == TileTier.Path)
+            if(value.Tier == TileTier.Path && GridManager.Instance.gridInitilized)
             {
-                DetectNeighbors();
+                RotateTileToNextAngle(DetectNeighbors());
+                GameManager.Instance.PathSpawn(this);
             }
         }
     }
@@ -100,7 +101,7 @@ public class TileHandler : MonoBehaviour
         }       
     }
 
-    public void DetectNeighbors()
+    public SideType DetectNeighbors()
     {
         Debug.Log("Detecting Paths");
         foreach (KeyValuePair<SideType, TileHandler> kvp in neighboringTilesMap)
@@ -113,9 +114,12 @@ public class TileHandler : MonoBehaviour
             if(neighbor.CurrentTile.Tier == TileTier.Path)
             {
                 Debug.Log($"OBJ: {transform.name} | {neighbor.name} has been detected as a path on the {side} side. Attempting to rotate.");
-                RotateTileToNextAngle(side);
-            }
+                return side;
+            }  
         }
+
+        Debug.LogWarning($"No path detected for {transform.name}");
+        return default; 
     }
     #endregion
 

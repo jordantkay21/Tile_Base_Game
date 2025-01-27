@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
     [Header("Dynamic UI Elements")]
     public ConfirmationWindow confirmWindow;
     public TileCardPanel tileCardPanel;
+    public TileMenu tileMenu;
 
     [Header("Tile Selection Logic")]
     public Transform hoverIndicator;
@@ -18,8 +19,20 @@ public class UIManager : MonoBehaviour
         GameManager.OnTileHovered += HighlightHoverTile;
         GameManager.OnTileSelected += HighlightSelectedTile;
         GameManager.OnTileDefined += DeselectTile;
+        GameManager.OnPathSpawned += OpenTileMenu;
     }
 
+    private void OpenTileMenu(TileHandler tile, TileMenuType menu)
+    {
+        switch (menu)
+        {
+            case TileMenuType.Rotate:
+                tileMenu.ShowRotateMenu(tile);
+                break;
+            default:
+                break;
+        }
+    }
 
     #region Tile Selection Logic
 
@@ -60,8 +73,6 @@ public class UIManager : MonoBehaviour
         confirmWindow.HideConfirmation();
         DeselectTile();
     }
-
-
 
     private void HighlightHoverTile(GameObject tile)
     {
