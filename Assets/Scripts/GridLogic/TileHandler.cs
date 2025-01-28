@@ -197,20 +197,6 @@ public class TileHandler : MonoBehaviour
     }
     #endregion
 
-    public CardData GetCard(CardType cardType)
-    {
-        switch (cardType)
-        {
-            case CardType.TileCard:
-                return _attachedTileCard;
-            case CardType.StructureCard:
-                return _attachedStructureCard;
-        }
-        return null;
-    }
-
-
-
     #region Tile Data Sync Logic
     private void SetTileVisuals()
     {
@@ -227,4 +213,16 @@ public class TileHandler : MonoBehaviour
         tileObj = _attachedStructureCard.SpawnObj(transform);
     }
     #endregion
+
+    public CardData GetCard(CardType cardType)
+    {
+        switch (cardType)
+        {
+            case CardType.TileCard:
+                return _attachedTileCard;
+            case CardType.StructureCard:
+                return _attachedStructureCard;
+        }
+        return null;
+    }
 }
