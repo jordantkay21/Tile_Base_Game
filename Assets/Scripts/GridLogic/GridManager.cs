@@ -290,6 +290,19 @@ public class GridManager : MonoBehaviour
                     $"\n Tile({row},{column}) is now <color=aqua>Tile({newRow},{newColumn}</color>");
 
                 newGridTiles[newRow, newColumn] = gridTiles[row, column];
+
+                //TileHandler tHandler = newGridTiles[newRow, newColumn].GetComponent<TileHandler>();
+                //tHandler.position = new Vector2Int(newRow, newColumn);
+                //tHandler.gameObject.name = $"Tile({newRow},{newColumn})";
+
+                //// Reassign the tile's parent to the correct new row
+                //Transform newRowParent = gridParent.Find($"Row_{newRow}");
+                //if (newRowParent == null)
+                //{
+                //    newRowParent = new GameObject($"Row_{newRow}").transform;
+                //    newRowParent.parent = gridParent;
+                //}
+                //tHandler.transform.parent = newRowParent;
             }
         }
 
@@ -334,14 +347,14 @@ public class GridManager : MonoBehaviour
                     Vector3 position = new Vector3(gridColumn * tileSize, 0, gridRow * tileSize);
                     GameObject tileGO = Instantiate(tilePrefab, position, Quaternion.identity, rowParent);
 
-                    tileGO.name = $"Tile({gridRow},{gridColumn})";
+                    tileGO.name = $"Tile({newRow},{newColumn})";
 
                     TileHandler tHandler = tileGO.GetComponent<TileHandler>();
-                    tHandler.position = new Vector2Int(gridRow, gridColumn);
+                    tHandler.position = new Vector2Int(newRow, newColumn);
                     tHandler.CurrentTile = GameManager.Instance.GetTileData(TileType.Locked);
 
                     newGridTiles[newRow, newColumn] = tileGO;
-                    Debug.Log($"$AddOuterRing / Step7 | <color=aqua>Tile_{gridRow},{gridColumn}</color> has been created and added to the newGridTiles[]");
+                    Debug.Log($"$AddOuterRing / Step7 | <color=aqua>Tile_{newRow},{newColumn}</color> has been created and added to the newGridTiles[]");
                 }
             }
         }
@@ -368,10 +381,14 @@ public class GridManager : MonoBehaviour
         Debug.Log($"<color=black> AddOuterRing | STEP NINE: CASCHE NEIGHBORS FOR ALL TILES</color>");
         #endregion
         Debug.Log("<color=fuchsia> AddOuterRing | Outer Ring has been completed with updated coordinates and neighbor reference updates.");
+
+        #region STEP TEN: REFRESH TILE HIERARCHY
+        RefreshTileHierarchy();
+        #endregion
     }
 
 
-
+    [Button("Get Tile")]
     public TileHandler GetTile(Vector2Int tilePos)
     {
         int row = tilePos.x;
@@ -391,4 +408,45 @@ public class GridManager : MonoBehaviour
 
         return gridTiles[row, column].GetComponent<TileHandler>();
     }
+
+    public void RefreshTileHierarchy()
+    {
+        Transform gridParent = transform.Find("Grid");
+
+        if (gridParent == null)
+        {
+            Debug.LogError("Grid parent not found! Ensure the grid structure matches the initial setup.");
+            return;
+        }
+
+        // Iterate through the entire grid and update hierarchy
+        for (int row = 0; row < gridTiles.GetLength(0); row++)
+        {
+            // Ensure the row parent exists
+            Transform rowParent = gridParent.Find($"Row_{row}");
+            if (rowParent == null)
+            {
+                rowParent = new GameObject($"Row_{row}").transform;
+                rowParent.parent = gridParent;
+            }
+
+            for (int column = 0; column < gridTiles.GetLength(1); column++)
+            {
+                if (gridTiles[row, column] != null)
+                {
+                    TileHandler tHandler = gridTiles[row, column].GetComponent<TileHandler>();
+
+                    // Update tile position data
+                    tHandler.position = new Vector2Int(row, column);
+                    tHandler.gameObject.name = $"Tile({row},{column})";
+
+                    // Reparent the tile correctly under the row parent
+                    tHandler.transform.parent = rowParent;
+                }
+            }
+        }
+
+        Debug.Log("<color=green>Grid hierarchy and tile data successfully refreshed!</color>");
+    }
+
 }
