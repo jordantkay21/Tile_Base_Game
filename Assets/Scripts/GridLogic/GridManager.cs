@@ -62,6 +62,8 @@ public class GridManager : MonoBehaviour
     public GameObject centerTile;
 
     public bool gridInitilized = false;
+    public double offset = 4;
+    public int expansionCount = 0;
 
     private void Awake()
     {
@@ -222,169 +224,110 @@ public class GridManager : MonoBehaviour
     [Button("Add Outer Ring")]
     public void AddOuterRing()
     {
-        Debug.Log($"AddOuterRing | Outer Ring Calculating... ");
+        Debug.Log($"AddOuterRing | Expanding grid...");
 
-        #region STEP ONE: Retreive Current Grid Dimension
-        // Get current dimensions
-        int currentRows = gridTiles.GetLength(0);
-        int currentColumns = gridTiles.GetLength(1);
-
-        Debug.Log($"<color=black> AddOuterRing | STEP ONE: Retrieve Current Grid Dimensions " +
-            $"\n currentRows = {currentRows} & currentColumns = {currentColumns} </color>");
-        #endregion
-
-        #region STEP TWO: Calculate New Grid Dimensions
-        // New dimensions for the outer ring
-        int newRows = currentRows + 2;
-        int newColumns = currentColumns + 2;
-
-        Debug.Log($"<color=black> AddOuterRing | STEP TWO: Calculate New Grid Dimensions " +
-            $"\n newRows = {newRows} & newColumns = {newColumns} </color>");
-        #endregion
-
-        #region STEP THREE: Create a New Grid Array
-        // Create a new grid with updated dimensions
-        GameObject[,] newGridTiles = new GameObject[newRows, newColumns];
-
-        Debug.Log($"<color=black> AddOuterRing | STEP THREE: Create a New Grid Array " +
-            $"\n newGridTiles = {newGridTiles} </color>");
-        #endregion
-
-        #region STEP FOUR: Define Offsets for the Original Grid
-        // Offset for translating old coordinates to new grid
-        int rowOffset = 1;
-        int columnOffset = 1;
-
-        Debug.Log($"<color=black> AddOuterRing | STEP FOUR: Define Offsets for the Original Grid " +
-            $"\n rowOffset = {rowOffset} & columnOffset = {columnOffset} </color>");
-        #endregion
-
-        #region STEP FIVE: Retrieve the Grid Parent
-        // Reference to the grid parent
-        Transform gridParent = transform.Find("Grid");
-
-
-        if (gridParent == null)
+        if(expansionCount == 5)
         {
-            Debug.LogError("Grid parent not found! Ensure the grid structure matches the initial setup.");
+            Debug.Log("Can not expand further!");
             return;
         }
 
-        Debug.Log($"<color=black> AddOuterRing | STEP FIVE: Get the Grid Parent " +
-            $"\n gridParent = {gridParent} </color>");
+        #region STEP ONE: Retrieve Current Grid Dimensions
+        int currentRows = gridTiles.GetLength(0);
+        int currentColumns = gridTiles.GetLength(1);
+        Debug.Log($"Current Grid: {currentRows} rows x {currentColumns} columns");
         #endregion
 
-        #region STEP SIX: COPY EXISTING TILES TO THE NEW GRID
-        Debug.Log($"<color=olive> AddOuterRing | STEP SIX: COPY EXISTING TILES TO THE NEW GRID " +
-            $"\n Scan starting...");
-        // Copy existing tiles to the new grid with offset
+        #region STEP TWO: Calculate New Grid Dimensions
+        int newRows = currentRows + 2;
+        int newColumns = currentColumns + 2;
+        GameObject[,] newGridTiles = new GameObject[newRows, newColumns];
+        Debug.Log($"New Grid: {newRows} rows x {newColumns} columns");
+        #endregion
+
+        #region STEP THREE: Calculate Center Shift
+        expansionCount++;
+
+        int rowOffset = 1;
+        int columnOffset = 1;
+        Debug.Log($"Offset for old tiles: rowOffset={rowOffset}, columnOffset={columnOffset}");
+        #endregion
+
+        #region STEP FOUR: Copy Old Tiles into Expanded Grid
         for (int row = 0; row < currentRows; row++)
         {
-            Debug.Log($"AddOuterRing/Step6 | Iterating through <color=aqua>currentRow {row}</color>");
             for (int column = 0; column < currentColumns; column++)
             {
                 int newRow = row + rowOffset;
                 int newColumn = column + columnOffset;
-
-                Debug.Log($"AddOuterRing/Step6 | Transferring <color=aqua>tile ({row},{column})</color> " +
-                    $"\n Tile({row},{column}) is now <color=aqua>Tile({newRow},{newColumn}</color>");
-
                 newGridTiles[newRow, newColumn] = gridTiles[row, column];
 
-                //TileHandler tHandler = newGridTiles[newRow, newColumn].GetComponent<TileHandler>();
-                //tHandler.position = new Vector2Int(newRow, newColumn);
-                //tHandler.gameObject.name = $"Tile({newRow},{newColumn})";
-
-                //// Reassign the tile's parent to the correct new row
-                //Transform newRowParent = gridParent.Find($"Row_{newRow}");
-                //if (newRowParent == null)
-                //{
-                //    newRowParent = new GameObject($"Row_{newRow}").transform;
-                //    newRowParent.parent = gridParent;
-                //}
-                //tHandler.transform.parent = newRowParent;
+                // Update tile metadata
+                TileHandler tHandler = newGridTiles[newRow, newColumn].GetComponent<TileHandler>();
+                tHandler.position = new Vector2Int(newRow, newColumn);
+                tHandler.gameObject.name = $"Tile({newRow},{newColumn})";
             }
         }
-
-        Debug.Log($"<Color=olive> AddOuterRing | STEP SIX: COPY EXISTING TILES TO THE NEW GRID</color> " +
-            $"\n <Color=purple>Existing Grid transfered to new grid with new coordinates </color>");
+        Debug.Log($"Existing tiles successfully transferred.");
         #endregion
 
-        #region STEP SEVEN: CREATE NEW ROWS AND SPAWN TILES
-        Debug.Log($"<Color=olive> AddOuterRing | STEP SEVEN: CREATE NEW ROWS AND SPAWN TILES " +
-            $"\n Begining to scan new grid...");
-        // Create new rows and add tiles for the outer ring
-        for (int newRow = 0; newRow < newRows; newRow++)
+        #region STEP FIVE: Generate Outer Ring Tiles
+        Transform gridParent = transform.Find("Grid") ?? new GameObject("Grid").transform;
+
+        #region Configure Position Offset
+        switch (expansionCount)
         {
-            //Calculate the grid-relative row coordinate
-            int gridRow = newRow - rowOffset;
-            Debug.Log($"<color=#ff7f50>AddOuterRing/Step7 | <color=#ff7f50>grid-relative <b>row</b> coordinate is {gridRow}</color><color=aqua> (newRow({newRow}) - rowOffset({rowOffset}))</color></color>");
-
-            //Find or create the correct row parent baed on grid-relative row coordinate
-            Debug.Log($"AddOuterRing/Step7 | Attempting to Find parent of <color=aqua>row_{gridRow}</color>");
-            Transform rowParent = gridParent.Find($"Row_{gridRow}");
-
-            if (rowParent == null)
+            case 1:
+                offset = 4;
+                break;
+            case 2:
+                offset = 3;
+                break;
+            case 3:
+                offset = 2.66;
+                break;
+            case 4:
+                offset = 2.5;
+                break;
+            case 5:
+                offset = 2.4;
+                break;
+        }
+        #endregion
+        for (int row = 0; row < newRows; row++)
+        {
+            for (int column = 0; column < newColumns; column++)
             {
-                rowParent = new GameObject($"Row_{gridRow}").transform;
-                rowParent.parent = gridParent;
-                Debug.Log($"AddOuterRing/Step7 | <color=yellow>Row_{gridRow} was not found. Row created within hierarchy.</color>");
-            }
-            else
-            {
-                Debug.Log($"AddOuterRing/Step7 | <color=green>Row_{gridRow} was found!</color>");
-            }
-
-            for (int newColumn = 0; newColumn < newColumns; newColumn++)
-            {
-                Debug.Log($"AddOuterRing/Step7 | Scanning for tile at location <color=aqua>row({newRow}),column({newColumn})</color>");
-                if (newGridTiles[newRow, newColumn] == null) // Only spawn new tiles
+                if (newGridTiles[row, column] == null) // Only create new tiles
                 {
-                    // Calculate the grid-relative position
-                    int gridColumn = newColumn - columnOffset;
-                    Debug.Log($"AddOuterRing/Step7 | <color=#ff7f50> grid-relative <b>column</b> coordinate is {gridColumn}</color> <color=aqua>(newColumn({newColumn}) - columnOffset({columnOffset}))</color></color>");
 
-                    Vector3 position = new Vector3(gridColumn * tileSize, 0, gridRow * tileSize);
-                    GameObject tileGO = Instantiate(tilePrefab, position, Quaternion.identity, rowParent);
+                    Vector3 position = new Vector3((float)((column - (newColumns - 1) / offset) * tileSize), 0, (float)((row - (newRows - 1) / offset) * tileSize));
+                    Debug.Log($"<color=aqua> Spawning new tile [{row},{column}] at... " +
+                        $"\n X AXIS -> [{(column - (newColumns - 1) / offset) * tileSize}] | (column - (newColumns - 1) / offset) * tileSize) | ({column} - ({newColumns} - 1) / {offset}) * {tileSize})" +
+                        $"\n Y AXIS -> 0 " +
+                        $"\n Z AXIS -> [{(row - (newRows - 1) / offset) * tileSize}] | (row - (newRows - 1) / offset) * tileSize | ({row} - ({newRows} - 1) / {offset} * {tileSize}) | ");
 
-                    tileGO.name = $"Tile({newRow},{newColumn})";
+                    GameObject tileGO = Instantiate(tilePrefab, position, Quaternion.identity, gridParent);
+                    tileGO.name = $"Tile({row},{column})";
 
                     TileHandler tHandler = tileGO.GetComponent<TileHandler>();
-                    tHandler.position = new Vector2Int(newRow, newColumn);
+                    tHandler.position = new Vector2Int(row, column);
                     tHandler.CurrentTile = GameManager.Instance.GetTileData(TileType.Locked);
 
-                    newGridTiles[newRow, newColumn] = tileGO;
-                    Debug.Log($"$AddOuterRing / Step7 | <color=aqua>Tile_{newRow},{newColumn}</color> has been created and added to the newGridTiles[]");
+                    newGridTiles[row, column] = tileGO;
                 }
             }
         }
-        Debug.Log($"<Color=black> AddOuterRing | STEP SEVEN: CREATE NEW ROWS AND SPAWN TILES " +
-    $"\n <color=purple>All new tiles have been created and added </color>");
+        Debug.Log($"Outer ring tiles successfully created.");
         #endregion
 
-        #region STEP EIGHT: UPDATE THE GRID REFERENCE
-        // Update the grid reference
+        #region STEP SIX: Update the Grid Reference & Refresh Hierarchy
         gridTiles = newGridTiles;
-        Debug.Log($"<Color=black> AddOuterRing | STEP EIGHT: UPDATE THE GRID REFERENCE");
-        #endregion
-
-        #region STEP NINE: CASCHE NEIGHBORS FOR ALL TILES
-        // Cache neighbors for all tiles
-        foreach (var tile in gridTiles)
-        {
-            if (tile != null)
-            {
-                TileHandler tHandler = tile.GetComponent<TileHandler>();
-                tHandler.CacheNeighbors();
-            }
-        }
-        Debug.Log($"<color=black> AddOuterRing | STEP NINE: CASCHE NEIGHBORS FOR ALL TILES</color>");
-        #endregion
-        Debug.Log("<color=fuchsia> AddOuterRing | Outer Ring has been completed with updated coordinates and neighbor reference updates.");
-
-        #region STEP TEN: REFRESH TILE HIERARCHY
         RefreshTileHierarchy();
+        Debug.Log($"Grid expansion completed.");
         #endregion
+
+        DebugPrintGrid();
     }
 
 
@@ -447,6 +390,20 @@ public class GridManager : MonoBehaviour
         }
 
         Debug.Log("<color=green>Grid hierarchy and tile data successfully refreshed!</color>");
+    }
+
+    private void DebugPrintGrid()
+    {
+        string gridOutput = "\n";
+        for (int row = gridTiles.GetLength(0) - 1; row >= 0; row--)
+        {
+            for (int col = 0; col < gridTiles.GetLength(1); col++)
+            {
+                gridOutput += gridTiles[row, col] != null ? "X " : ". ";
+            }
+            gridOutput += "\n";
+        }
+        Debug.Log(gridOutput);
     }
 
 }
