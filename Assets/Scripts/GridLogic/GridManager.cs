@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -294,6 +295,7 @@ public class GridManager : MonoBehaviour
                 break;
         }
         #endregion
+
         for (int row = 0; row < newRows; row++)
         {
             for (int column = 0; column < newColumns; column++)
@@ -312,7 +314,9 @@ public class GridManager : MonoBehaviour
 
                     TileHandler tHandler = tileGO.GetComponent<TileHandler>();
                     tHandler.position = new Vector2Int(row, column);
-                    tHandler.CurrentTile = GameManager.Instance.GetTileData(TileType.Locked);
+
+                    bool shouldBeUndefined = Random.value < 0.25f;
+                    tHandler.CurrentTile = GameManager.Instance.GetTileData((shouldBeUndefined ? TileType.Undefined : TileType.Locked));
 
                     newGridTiles[row, column] = tileGO;
                 }
