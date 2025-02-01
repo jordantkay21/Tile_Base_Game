@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
     public GameObject hoveredTile;
     public GameObject selectedTile;
 
+    [Header("Camera Properties")]
+    public CameraHandler playerCameraControls;
+
     public static event Action<GameObject> OnTileSelected;
     public static event Action<GameObject> OnTileHovered;
     public static event Action OnTileDefined;
@@ -39,13 +42,32 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this);
         }
+
+        playerCameraControls.enabled = false;
     }
 
     private void OnEnable()
     {
         InputManager.OnHover += HandleHover;
         InputManager.OnSelect += HandleSelect;
+        InputManager.OnCameraControlActivate += HandleCameraActivation;
 
+    }
+
+    private void HandleCameraActivation(bool isActive)
+    {
+        if (playerCameraControls == null)
+        {
+            playerCameraControls = FindFirstObjectByType<CameraHandler>();
+
+            if (playerCameraControls == null)
+            {
+                Debug.LogError("CameraHandler is missing! Ensure it exists in the scene.");
+                return;
+            }
+        }
+
+        playerCameraControls.enabled = isActive;
     }
 
     public void PathSpawn(TileHandler tile)

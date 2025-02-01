@@ -24,6 +24,34 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     ""name"": ""GameInput"",
     ""maps"": [
         {
+            ""name"": ""GameInputs"",
+            ""id"": ""41d5e5d6-c26c-440f-842e-d2a7348153d3"",
+            ""actions"": [
+                {
+                    ""name"": ""ActivateCameraControls"",
+                    ""type"": ""Button"",
+                    ""id"": ""c17f182d-abc5-477c-af4d-d766092691e4"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""f3a0db22-b26a-4bf7-9775-e9b0c767c0e8"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ActivateCameraControls"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
             ""name"": ""TileInteractions"",
             ""id"": ""e31b2e86-efd8-4ae3-9d6b-72408ee28457"",
             ""actions"": [
@@ -92,19 +120,205 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""CameraControl"",
+            ""id"": ""97dfcfe7-4ab9-4a73-8efa-adfed5f728c4"",
+            ""actions"": [
+                {
+                    ""name"": ""Look"",
+                    ""type"": ""Value"",
+                    ""id"": ""1757d6de-8efd-4d4f-b66e-37127891635f"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Sprint"",
+                    ""type"": ""Button"",
+                    ""id"": ""b8590170-e644-4a19-9ff0-3262d486192c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UpDown"",
+                    ""type"": ""Value"",
+                    ""id"": ""6de025c1-0df5-4134-9ace-71dabc585fae"",
+                    ""expectedControlType"": ""Analog"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Sideways"",
+                    ""type"": ""Value"",
+                    ""id"": ""7bf68eee-ca3d-454b-ae9d-cf3b6f49d5b1"",
+                    ""expectedControlType"": ""Analog"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ForwardBackward"",
+                    ""type"": ""Value"",
+                    ""id"": ""2c212171-97e6-412c-9b7b-6eaa7a45376a"",
+                    ""expectedControlType"": ""Analog"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""a00ad8a4-868e-4d10-b15e-2d6880894b5a"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d5b21782-72b5-4ac1-bca1-ddd077c4aab0"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""b5dbdc9d-ec4c-42f9-b5f7-e8af8c7e072e"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UpDown"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""073f74d2-76e5-4543-88c3-2dc96d27b47b"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UpDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""bd9d41d2-b1e8-4a92-a52e-78b9bcc538bb"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UpDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""5322b9e7-8647-407c-be39-089483edc05d"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sideways"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""de4fb0e0-41c6-4fc1-ba63-526ed2b046ee"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sideways"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""f81dfcff-3bbb-4a00-9fc1-0549f5399280"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sideways"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""80aed912-ff10-4a59-b15c-7f12c4041a68"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ForwardBackward"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""1384cf2b-538f-48b6-b109-8447e9d803c7"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ForwardBackward"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""6038f2d9-4c65-4085-b698-621a7ff08846"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ForwardBackward"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
 }");
+        // GameInputs
+        m_GameInputs = asset.FindActionMap("GameInputs", throwIfNotFound: true);
+        m_GameInputs_ActivateCameraControls = m_GameInputs.FindAction("ActivateCameraControls", throwIfNotFound: true);
         // TileInteractions
         m_TileInteractions = asset.FindActionMap("TileInteractions", throwIfNotFound: true);
         m_TileInteractions_Hover = m_TileInteractions.FindAction("Hover", throwIfNotFound: true);
         m_TileInteractions_Select = m_TileInteractions.FindAction("Select", throwIfNotFound: true);
+        // CameraControl
+        m_CameraControl = asset.FindActionMap("CameraControl", throwIfNotFound: true);
+        m_CameraControl_Look = m_CameraControl.FindAction("Look", throwIfNotFound: true);
+        m_CameraControl_Sprint = m_CameraControl.FindAction("Sprint", throwIfNotFound: true);
+        m_CameraControl_UpDown = m_CameraControl.FindAction("UpDown", throwIfNotFound: true);
+        m_CameraControl_Sideways = m_CameraControl.FindAction("Sideways", throwIfNotFound: true);
+        m_CameraControl_ForwardBackward = m_CameraControl.FindAction("ForwardBackward", throwIfNotFound: true);
     }
 
     ~@GameInput()
     {
+        UnityEngine.Debug.Assert(!m_GameInputs.enabled, "This will cause a leak and performance issues, GameInput.GameInputs.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_TileInteractions.enabled, "This will cause a leak and performance issues, GameInput.TileInteractions.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_CameraControl.enabled, "This will cause a leak and performance issues, GameInput.CameraControl.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -163,6 +377,52 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
+    // GameInputs
+    private readonly InputActionMap m_GameInputs;
+    private List<IGameInputsActions> m_GameInputsActionsCallbackInterfaces = new List<IGameInputsActions>();
+    private readonly InputAction m_GameInputs_ActivateCameraControls;
+    public struct GameInputsActions
+    {
+        private @GameInput m_Wrapper;
+        public GameInputsActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ActivateCameraControls => m_Wrapper.m_GameInputs_ActivateCameraControls;
+        public InputActionMap Get() { return m_Wrapper.m_GameInputs; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(GameInputsActions set) { return set.Get(); }
+        public void AddCallbacks(IGameInputsActions instance)
+        {
+            if (instance == null || m_Wrapper.m_GameInputsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_GameInputsActionsCallbackInterfaces.Add(instance);
+            @ActivateCameraControls.started += instance.OnActivateCameraControls;
+            @ActivateCameraControls.performed += instance.OnActivateCameraControls;
+            @ActivateCameraControls.canceled += instance.OnActivateCameraControls;
+        }
+
+        private void UnregisterCallbacks(IGameInputsActions instance)
+        {
+            @ActivateCameraControls.started -= instance.OnActivateCameraControls;
+            @ActivateCameraControls.performed -= instance.OnActivateCameraControls;
+            @ActivateCameraControls.canceled -= instance.OnActivateCameraControls;
+        }
+
+        public void RemoveCallbacks(IGameInputsActions instance)
+        {
+            if (m_Wrapper.m_GameInputsActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IGameInputsActions instance)
+        {
+            foreach (var item in m_Wrapper.m_GameInputsActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_GameInputsActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public GameInputsActions @GameInputs => new GameInputsActions(this);
+
     // TileInteractions
     private readonly InputActionMap m_TileInteractions;
     private List<ITileInteractionsActions> m_TileInteractionsActionsCallbackInterfaces = new List<ITileInteractionsActions>();
@@ -216,9 +476,99 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         }
     }
     public TileInteractionsActions @TileInteractions => new TileInteractionsActions(this);
+
+    // CameraControl
+    private readonly InputActionMap m_CameraControl;
+    private List<ICameraControlActions> m_CameraControlActionsCallbackInterfaces = new List<ICameraControlActions>();
+    private readonly InputAction m_CameraControl_Look;
+    private readonly InputAction m_CameraControl_Sprint;
+    private readonly InputAction m_CameraControl_UpDown;
+    private readonly InputAction m_CameraControl_Sideways;
+    private readonly InputAction m_CameraControl_ForwardBackward;
+    public struct CameraControlActions
+    {
+        private @GameInput m_Wrapper;
+        public CameraControlActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Look => m_Wrapper.m_CameraControl_Look;
+        public InputAction @Sprint => m_Wrapper.m_CameraControl_Sprint;
+        public InputAction @UpDown => m_Wrapper.m_CameraControl_UpDown;
+        public InputAction @Sideways => m_Wrapper.m_CameraControl_Sideways;
+        public InputAction @ForwardBackward => m_Wrapper.m_CameraControl_ForwardBackward;
+        public InputActionMap Get() { return m_Wrapper.m_CameraControl; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CameraControlActions set) { return set.Get(); }
+        public void AddCallbacks(ICameraControlActions instance)
+        {
+            if (instance == null || m_Wrapper.m_CameraControlActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_CameraControlActionsCallbackInterfaces.Add(instance);
+            @Look.started += instance.OnLook;
+            @Look.performed += instance.OnLook;
+            @Look.canceled += instance.OnLook;
+            @Sprint.started += instance.OnSprint;
+            @Sprint.performed += instance.OnSprint;
+            @Sprint.canceled += instance.OnSprint;
+            @UpDown.started += instance.OnUpDown;
+            @UpDown.performed += instance.OnUpDown;
+            @UpDown.canceled += instance.OnUpDown;
+            @Sideways.started += instance.OnSideways;
+            @Sideways.performed += instance.OnSideways;
+            @Sideways.canceled += instance.OnSideways;
+            @ForwardBackward.started += instance.OnForwardBackward;
+            @ForwardBackward.performed += instance.OnForwardBackward;
+            @ForwardBackward.canceled += instance.OnForwardBackward;
+        }
+
+        private void UnregisterCallbacks(ICameraControlActions instance)
+        {
+            @Look.started -= instance.OnLook;
+            @Look.performed -= instance.OnLook;
+            @Look.canceled -= instance.OnLook;
+            @Sprint.started -= instance.OnSprint;
+            @Sprint.performed -= instance.OnSprint;
+            @Sprint.canceled -= instance.OnSprint;
+            @UpDown.started -= instance.OnUpDown;
+            @UpDown.performed -= instance.OnUpDown;
+            @UpDown.canceled -= instance.OnUpDown;
+            @Sideways.started -= instance.OnSideways;
+            @Sideways.performed -= instance.OnSideways;
+            @Sideways.canceled -= instance.OnSideways;
+            @ForwardBackward.started -= instance.OnForwardBackward;
+            @ForwardBackward.performed -= instance.OnForwardBackward;
+            @ForwardBackward.canceled -= instance.OnForwardBackward;
+        }
+
+        public void RemoveCallbacks(ICameraControlActions instance)
+        {
+            if (m_Wrapper.m_CameraControlActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ICameraControlActions instance)
+        {
+            foreach (var item in m_Wrapper.m_CameraControlActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_CameraControlActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public CameraControlActions @CameraControl => new CameraControlActions(this);
+    public interface IGameInputsActions
+    {
+        void OnActivateCameraControls(InputAction.CallbackContext context);
+    }
     public interface ITileInteractionsActions
     {
         void OnHover(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);
+    }
+    public interface ICameraControlActions
+    {
+        void OnLook(InputAction.CallbackContext context);
+        void OnSprint(InputAction.CallbackContext context);
+        void OnUpDown(InputAction.CallbackContext context);
+        void OnSideways(InputAction.CallbackContext context);
+        void OnForwardBackward(InputAction.CallbackContext context);
     }
 }
