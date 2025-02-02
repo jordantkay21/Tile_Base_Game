@@ -33,6 +33,11 @@ public class CameraHandler : MonoBehaviour, Unity.Cinemachine.IInputAxisOwner
     [Tooltip("Sprint movement.  Value is 0 or 1. If 1, then is sprinting")]
     public InputAxis Sprint = InputAxis.DefaultMomentary;
 
+    // Boundaries
+    private float minX, maxX, minZ, maxZ;
+    public float minY = 5f;  // Minimum height
+    public float maxY = 50f; // Maximum height
+
     static InputAxis DefaultPan => new()
     { Value = 0, Range = new Vector2(-180, 180), Wrap = true, Center = 0, Restrictions = InputAxis.RestrictionFlags.NoRecentering };
     static InputAxis DefaultTilt => new()
@@ -88,6 +93,14 @@ public class CameraHandler : MonoBehaviour, Unity.Cinemachine.IInputAxisOwner
         var speed = Sprint.Value < 0.01f ? Speed : Speed * SprintMultiplier;
 
         // Apply motion
-        transform.SetPositionAndRotation(transform.position + speed * Time.deltaTime * movement, rot);
+        Vector3 newPosition = transform.position + speed * Time.deltaTime * movement;
+
+        // Apply boundary constraints
+        newPosition.x = Mathf.Clamp(newPosition.x, minX, maxX);
+        newPosition.y = Mathf.Clamp(newPosition.y, minY, maxY);
+        newPosition.z = Mathf.Clamp(newPosition.z, minZ, maxZ);
+
+        transform.SetPositionAndRotation(newPosition, rot);
     }
+
 }
